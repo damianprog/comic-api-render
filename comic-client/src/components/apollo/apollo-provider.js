@@ -11,7 +11,7 @@ const Provider = () => {
   const history = useHistory();
 
   const httpLink = createHttpLink({
-    uri: 'http://localhost:4000/graphql',
+    uri: '/graphql',
     credentials: 'include',
   });
 

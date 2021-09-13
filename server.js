@@ -6,6 +6,8 @@ const typeDefs = require('./graphql/schema');
 const resolvers = require('./graphql/resolvers');
 const cookieParser = require('cookie-parser');
 const JWT_SECRET = require('./config.js');
+const path = require('path');
+const PORT = process.env.PORT || 4000;
 
 const app = express();
 app.use(express.json({ limit: '50mb' }));
@@ -24,6 +26,15 @@ app.use(
     origin: 'http://localhost:3000',
   })
 );
+// app.use(express.static(path.join(__dirname, 'comic-client/build')));
+if (process.env.NODE_ENV === 'production') {
+  //serve static content
+  // npm run build
+  app.use(express.static(path.join(__dirname, 'comic-client/build')));
+}
+
+console.log(__dirname);
+
 const server = new ApolloServer({
   typeDefs,
   resolvers,
@@ -39,7 +50,10 @@ const server = new ApolloServer({
 
 server.applyMiddleware({ app, cors: false });
 
-const PORT = process.env.PORT || 4000;
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'comic-client/build/index.html'));
+});
+
 app.listen(PORT, () => {
-  console.log('The server started on port ' + PORT);
+  console.log(`The server started on port ${PORT}`);
 });
