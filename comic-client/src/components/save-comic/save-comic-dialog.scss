@@ -1,0 +1,44 @@
+.save-comic-dialog {
+  .close-btn {
+    padding: 4px;
+  }
+
+  .dialog-title {
+    padding: 12px 5px 12px 15px;
+    border-bottom: 1px solid #ccc;
+    h2 {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+
+  .dialog-content {
+    padding: 0 14px;
+    max-width: 600px;
+    min-width: 235px;
+  }
+
+  .dialog-actions {
+    border-top: 1px solid #ccc;
+    padding: 17px 14px 17px 12px;
+    display: block;
+
+    svg {
+      margin-right: 10px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .MuiDialog-container {
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .MuiDialog-paper {
+      margin: 0;
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+}

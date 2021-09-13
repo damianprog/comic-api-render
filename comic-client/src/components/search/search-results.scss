@@ -1,0 +1,16 @@
+.search-results {
+  .loading {
+    margin-top: 30px;
+    text-align: center;
+    height: 50px;
+  }
+
+  .list-pagination {
+    max-width: 840px;
+
+    .pagination ul {
+      padding: 10px 0 30px 0;
+      justify-content: center;
+    }
+  }
+}

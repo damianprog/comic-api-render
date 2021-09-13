@@ -1,0 +1,28 @@
+.comics-preview {
+  h2 {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 26px;
+    margin: 35px 0;
+    text-transform: uppercase;
+  }
+
+  .items-container {
+    display: grid;
+    column-gap: 20px;
+    row-gap: 65px;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  }
+
+  @media (max-width: 840px) {
+    .items-container {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .items-container {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+}

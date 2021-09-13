@@ -1,0 +1,21 @@
+.library-content {
+  display: flex;
+
+  .library-header {
+    margin: 20px 0;
+    display: inline-block;
+  }
+
+  .library-list {
+    padding-left: 30px;
+    flex: 0 0 270px;
+  }
+
+  @media (max-width: 840px) {
+    flex-direction: column;
+
+    .library-list {
+      flex: 0 0 100%;
+    }
+  }
+}

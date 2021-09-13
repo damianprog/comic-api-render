@@ -1,0 +1,16 @@
+.edit-profile-page {
+  display: flex;
+  justify-content: center;
+  .edit-profile {
+    max-width: 650px;
+    padding-bottom: 0;
+
+    .content {
+      height: 100%;
+    }
+
+    .header {
+      padding-top: 10px;
+    }
+  }
+}

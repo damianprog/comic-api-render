@@ -1,0 +1,26 @@
+.user-activities-list-item-header {
+  display: flex;
+  margin-bottom: 16px;
+
+  .avatar {
+    width: 45px;
+    height: 45px;
+  }
+
+  .item-header-details {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-left: 5px;
+    font-size: 15px;
+    a {
+      font-weight: bold;
+    }
+
+    .date {
+      margin-top: 2px;
+      font-size: 13px;
+      color: #919191;
+    }
+  }
+}

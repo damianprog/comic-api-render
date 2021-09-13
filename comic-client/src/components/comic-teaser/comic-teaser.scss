@@ -1,0 +1,49 @@
+.comic-teaser {
+  display: flex;
+
+  .img-container {
+    width: 70px;
+
+    img {
+      width: 100%;
+      object-fit: cover;
+      display: block;
+    }
+  }
+
+  .info {
+    display: flex;
+    flex-direction: column;
+    padding-left: 10px;
+
+    h3 {
+      margin: 7px 0;
+    }
+
+    .save-dialog {
+      display: flex;
+      align-items: center;
+      flex: 1;
+
+      button {
+        padding: 0;
+        &:hover {
+          background: none;
+        }
+
+        svg {
+          margin-right: 8px;
+        }
+      }
+    }
+
+    .description {
+      a {
+        color: #00635d;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}

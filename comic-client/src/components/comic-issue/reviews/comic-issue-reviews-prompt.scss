@@ -1,0 +1,42 @@
+.comic-issue-reviews-prompt {
+  display: flex;
+  margin: 35px 0;
+
+  a {
+    font-weight: bold;
+  }
+
+  button {
+    border: 2px solid #5c5c5c;
+
+    &:hover {
+      border: 2px solid #5c5c5c;
+    }
+  }
+
+  .avatar {
+    width: 80px;
+    height: 80px;
+  }
+
+  .info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 5px 10px;
+  }
+
+  @media (max-width: 600px) {
+    a {
+      display: block;
+    }
+
+    @media (max-width: 600px) {
+      .avatar {
+        width: 70px;
+        height: 70px;
+      }
+    }
+  }
+}

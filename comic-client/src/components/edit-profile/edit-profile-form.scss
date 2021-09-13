@@ -1,0 +1,50 @@
+.edit-profile-form {
+  padding: 15px;
+
+  input,
+  .about,
+  select {
+    padding: 0 16px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    outline: none;
+
+    &:focus {
+      border: 1px solid #999;
+    }
+
+    &.error {
+      border: 1px solid #e62429;
+    }
+  }
+
+  p {
+    display: inline-block;
+  }
+
+  input {
+    width: 100%;
+  }
+
+  input,
+  select {
+    height: 42px;
+  }
+
+  .about {
+    height: 126px;
+    resize: none;
+    width: 100%;
+    padding: 16px;
+  }
+
+  .date-selector {
+    max-width: 326px;
+  }
+
+  .outer-label {
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+}

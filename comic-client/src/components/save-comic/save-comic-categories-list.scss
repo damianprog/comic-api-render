@@ -1,0 +1,22 @@
+.save-comic {
+  .categories-list {
+    padding: 8px 0;
+  }
+
+  .list-item {
+    padding: 0;
+    margin: 8px 0;
+    cursor: pointer;
+
+    span {
+      padding: 0 6px 0 0;
+      &:hover {
+        background: none;
+      }
+    }
+
+    .MuiListItemIcon-root {
+      min-width: 0;
+    }
+  }
+}

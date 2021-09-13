@@ -1,0 +1,29 @@
+.comic-issue-details-image {
+  max-width: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  img {
+    width: 100%;
+  }
+
+  .save-dialog-btn {
+    color: #fff;
+    margin-top: 8px;
+
+    &:hover {
+      background: none;
+    }
+
+    svg {
+      margin-right: 8px;
+    }
+  }
+
+  @media (max-width: 840px) {
+    .save-dialog-btn {
+      margin-top: 23px;
+    }
+  }
+}

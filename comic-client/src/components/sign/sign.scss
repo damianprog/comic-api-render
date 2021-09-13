@@ -1,0 +1,109 @@
+.sign {
+  font-size: 14px;
+  h2 {
+    text-align: center;
+  }
+  .title {
+    padding: 0 0 14px 0;
+    color: #e62429;
+    text-transform: uppercase;
+    font-size: 16px;
+  }
+
+  .errors-info {
+    color: #e62429;
+    background-color: #f7f7f7;
+    padding: 15px;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+  input,
+  select,
+  .errors-info {
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+
+  input,
+  select {
+    height: 42px;
+    outline: 0;
+    padding: 0 16px;
+    margin-bottom: 10px;
+
+    &:focus {
+      border: 1px solid #999;
+    }
+
+    &.error {
+      border: 1px solid #e62429;
+    }
+  }
+
+  .close-container {
+    display: flex;
+    justify-content: flex-end;
+    padding: 15px 15px 0 0;
+
+    svg {
+      cursor: pointer;
+    }
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .content {
+    width: 410px;
+    padding: 0 42px;
+    margin: auto;
+  }
+
+  .actions {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sign-button {
+    background-color: #e62429;
+    color: #fff;
+    margin-bottom: 22px;
+    width: 100%;
+    height: 42px;
+
+    &.Mui-disabled {
+      background-color: #ee686c;
+      color: #fff;
+    }
+  }
+
+  .sign-button:hover {
+    background-color: #d9181d;
+  }
+
+  &.sign-page {
+    .content {
+      width: 100%;
+      max-width: 326px;
+      padding: 40px 0 0 0;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .content {
+      width: 100%;
+    }
+
+    .MuiDialog-paper {
+      margin: 0;
+    }
+
+    .MuiDialog-paperWidthSm.MuiDialog-paperScrollBody {
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+}

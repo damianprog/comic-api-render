@@ -1,0 +1,37 @@
+.comic-issue-details-info {
+  color: #d2d2d2;
+
+  h2 {
+    font-size: 29px;
+    font-family: 'Roboto Condensed', sans-serif;
+    color: #fff;
+  }
+
+  h3 {
+    font-size: 20px;
+    letter-spacing: 0.7px;
+    margin: 18px 0 0 0;
+  }
+
+  .info-row {
+    display: flex;
+    justify-content: space-between;
+    max-width: 485px;
+  }
+
+  .info-description {
+    max-width: 430px;
+    margin-top: 36px;
+  }
+
+  @media (max-width: 840px) {
+    .info-row {
+      display: flex;
+      flex-direction: column;
+    }
+
+    h2 {
+      margin-top: 18px;
+    }
+  }
+}

@@ -1,0 +1,47 @@
+.search-item {
+  display: grid;
+  grid-template-columns: 3fr 12fr;
+  column-gap: 8%;
+  padding: 30px 0;
+  border-bottom: 1px solid #f2f2f2;
+
+  .search-item-image::before {
+    content: '';
+    display: inline-block;
+    width: 1px;
+    height: 0;
+    padding-bottom: 100%;
+  }
+
+  .search-item-image {
+    background-size: cover;
+    box-sizing: border-box;
+  }
+
+  .search-item-details-wrapper {
+    display: flex;
+
+    .search-item-details {
+      align-self: center;
+    }
+
+    h2 {
+      margin: 8px 0;
+    }
+
+    h2:hover {
+      color: #e62429;
+    }
+
+    b {
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #999;
+      font-size: 11px;
+    }
+
+    .item-type {
+      color: #bbb;
+    }
+  }
+}

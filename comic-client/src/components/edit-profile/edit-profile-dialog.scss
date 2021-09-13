@@ -1,0 +1,29 @@
+.edit-profile-dialog {
+  .MuiDialogContent-root:first-child {
+    padding-top: 10px;
+    overflow: hidden;
+  }
+
+  .close-container {
+    padding: 15px 0 8px 12px;
+  }
+
+  .dialog-content {
+    max-width: 650px;
+    padding: 0;
+  }
+
+  @media (max-width: 600px) {
+    .dialog-content {
+      width: 100%;
+    }
+
+    .MuiDialog-paper {
+      margin: 0;
+    }
+
+    .MuiDialog-paperWidthSm {
+      width: 100%;
+    }
+  }
+}

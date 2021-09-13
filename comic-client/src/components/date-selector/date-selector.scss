@@ -1,0 +1,24 @@
+.date-selector {
+  display: flex;
+  justify-content: space-between;
+}
+
+select:invalid {
+  color: #757575;
+}
+
+select option {
+  color: black;
+}
+
+.select-day {
+  width: 27%;
+}
+
+.select-month {
+  width: 36%;
+}
+
+.select-year {
+  width: 30%;
+}

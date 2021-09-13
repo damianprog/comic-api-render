@@ -1,0 +1,11 @@
+.edit-profile-activator {
+  button {
+    border: 1px solid #5c5c5c;
+    border-radius: 20px;
+    height: 38px;
+
+    &:hover {
+      background-color: #fff;
+    }
+  }
+}
