@@ -14,7 +14,10 @@ if (env === 'production') {
   sslConfig = {
     dialect: 'postgres',
     dialectOptions: {
-      ssl: true,
+      ssl: {
+        require: true,
+        rejectUnauthorized: false,
+      },
     },
   };
 }
