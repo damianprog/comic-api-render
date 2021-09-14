@@ -26,7 +26,7 @@ app.use(
     origin: 'http://localhost:3000',
   })
 );
-// app.use(express.static(path.join(__dirname, 'comic-client/build')));
+app.use(express.static(path.join(__dirname, 'comic-client/build')));
 if (process.env.NODE_ENV === 'production') {
   //serve static content
   // npm run build
