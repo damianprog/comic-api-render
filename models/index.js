@@ -8,8 +8,18 @@ const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../config/config.js')[env];
 const db = {};
 
-let sequelize;
-sequelize = new Sequelize(config);
+let sslConfig = {};
+
+if (env === 'production') {
+  sslConfig = {
+    dialect: 'postgres',
+    dialectOptions: {
+      ssl: true,
+    },
+  };
+}
+
+const sequelize = new Sequelize(config, sslConfig);
 
 fs.readdirSync(__dirname)
   .filter((file) => {
