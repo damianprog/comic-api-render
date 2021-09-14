@@ -26,10 +26,8 @@ app.use(
     origin: 'http://localhost:3000',
   })
 );
-app.use(express.static(path.join(__dirname, 'comic-client/build')));
+
 if (process.env.NODE_ENV === 'production') {
-  //serve static content
-  // npm run build
   app.use(express.static(path.join(__dirname, 'comic-client/build')));
 }
 
@@ -46,6 +44,7 @@ const server = new ApolloServer({
 
     return { user, res };
   },
+  introspection: true,
 });
 
 server.applyMiddleware({ app, cors: false });
