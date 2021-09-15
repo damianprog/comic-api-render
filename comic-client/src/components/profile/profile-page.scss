@@ -1,4 +1,10 @@
-.profile {
+.profile-page {
   max-width: 1000px;
   margin: 0 auto;
+
+  .loading {
+    margin-top: 30px;
+    text-align: center;
+    height: 50px;
+  }
 }
