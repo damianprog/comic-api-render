@@ -21,6 +21,7 @@ module.exports = (sequelize, DataTypes) => {
       penciler: DataTypes.STRING,
       description: DataTypes.TEXT,
       seriesId: DataTypes.INTEGER,
+      linkingUrl: DataTypes.STRING,
     },
     {
       sequelize,

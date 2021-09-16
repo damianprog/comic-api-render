@@ -49,6 +49,7 @@ const typeDefs = gql`
     penciler: String
     description: String
     seriesId: ID
+    linkingUrl: String
   }
 
   type Comic {
@@ -61,6 +62,7 @@ const typeDefs = gql`
     penciler: String
     description: String
     seriesId: ID
+    linkingUrl: String
   }
 
   type UserComic {

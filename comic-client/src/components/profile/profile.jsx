@@ -46,6 +46,7 @@ const Profile = ({ user, signedUser }) => {
           backgroundImage={backgroundImage}
         />
         <div className="header-details">
+          <p className="attribution">Data provided by Marvel. © 2014 Marvel</p>
           {isSignedUseruser() && <EditProfileActivator profileUser={user} />}
           <h2>{nickname}</h2>
           <p className="joined">

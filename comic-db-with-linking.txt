@@ -1,0 +1,717 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 13.1
+-- Dumped by pg_dump version 13.1
+
+-- Started on 2021-09-16 10:13:29
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- TOC entry 210 (class 1259 OID 17072)
+-- Name: reviews; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.reviews (
+    id integer NOT NULL,
+    comic_id integer,
+    user_id integer,
+    text text,
+    created_at timestamp with time zone NOT NULL,
+    updated_at timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.reviews OWNER TO postgres;
+
+--
+-- TOC entry 209 (class 1259 OID 17070)
+-- Name: Reviews_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Reviews_id_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Reviews_id_seq" OWNER TO postgres;
+
+--
+-- TOC entry 3045 (class 0 OID 0)
+-- Dependencies: 209
+-- Name: Reviews_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Reviews_id_seq" OWNED BY public.reviews.id;
+
+
+--
+-- TOC entry 200 (class 1259 OID 16569)
+-- Name: SequelizeMeta; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."SequelizeMeta" (
+    name character varying(255) NOT NULL
+);
+
+
+ALTER TABLE public."SequelizeMeta" OWNER TO postgres;
+
+--
+-- TOC entry 208 (class 1259 OID 17051)
+-- Name: users_comics; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.users_comics (
+    id integer NOT NULL,
+    category character varying(255),
+    created_at timestamp with time zone NOT NULL,
+    updated_at timestamp with time zone NOT NULL,
+    comic_id integer,
+    user_id integer
+);
+
+
+ALTER TABLE public.users_comics OWNER TO postgres;
+
+--
+-- TOC entry 207 (class 1259 OID 17049)
+-- Name: UserComics_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."UserComics_id_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."UserComics_id_seq" OWNER TO postgres;
+
+--
+-- TOC entry 3046 (class 0 OID 0)
+-- Dependencies: 207
+-- Name: UserComics_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."UserComics_id_seq" OWNED BY public.users_comics.id;
+
+
+--
+-- TOC entry 206 (class 1259 OID 16987)
+-- Name: users_details; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.users_details (
+    id integer NOT NULL,
+    about text,
+    interests text,
+    user_id integer,
+    created_at timestamp with time zone NOT NULL,
+    updated_at timestamp with time zone NOT NULL,
+    profile_image text,
+    background_image text,
+    profile_image_public_id text,
+    background_image_public_id text
+);
+
+
+ALTER TABLE public.users_details OWNER TO postgres;
+
+--
+-- TOC entry 205 (class 1259 OID 16985)
+-- Name: UserDetails_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."UserDetails_id_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."UserDetails_id_seq" OWNER TO postgres;
+
+--
+-- TOC entry 3047 (class 0 OID 0)
+-- Dependencies: 205
+-- Name: UserDetails_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."UserDetails_id_seq" OWNED BY public.users_details.id;
+
+
+--
+-- TOC entry 204 (class 1259 OID 16976)
+-- Name: comics; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.comics (
+    id integer NOT NULL,
+    title character varying(255) NOT NULL,
+    cover_image text,
+    onsale_date timestamp with time zone,
+    writer character varying(255),
+    inker character varying(255),
+    penciler character varying(255),
+    description text,
+    series_id integer,
+    created_at timestamp with time zone NOT NULL,
+    updated_at timestamp with time zone NOT NULL,
+    linking_url character varying(255)
+);
+
+
+ALTER TABLE public.comics OWNER TO postgres;
+
+--
+-- TOC entry 203 (class 1259 OID 16974)
+-- Name: comics_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.comics_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.comics_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 3048 (class 0 OID 0)
+-- Dependencies: 203
+-- Name: comics_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.comics_id_seq OWNED BY public.comics.id;
+
+
+--
+-- TOC entry 202 (class 1259 OID 16576)
+-- Name: users; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.users (
+    id integer NOT NULL,
+    nickname character varying(255),
+    email character varying(255),
+    password character varying(255),
+    created_at timestamp with time zone NOT NULL,
+    updated_at timestamp with time zone NOT NULL,
+    birth_date timestamp with time zone
+);
+
+
+ALTER TABLE public.users OWNER TO postgres;
+
+--
+-- TOC entry 201 (class 1259 OID 16574)
+-- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.users_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.users_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 3049 (class 0 OID 0)
+-- Dependencies: 201
+-- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
+
+
+--
+-- TOC entry 2883 (class 2604 OID 16979)
+-- Name: comics id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.comics ALTER COLUMN id SET DEFAULT nextval('public.comics_id_seq'::regclass);
+
+
+--
+-- TOC entry 2886 (class 2604 OID 17075)
+-- Name: reviews id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.reviews ALTER COLUMN id SET DEFAULT nextval('public."Reviews_id_seq"'::regclass);
+
+
+--
+-- TOC entry 2882 (class 2604 OID 16579)
+-- Name: users id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_id_seq'::regclass);
+
+
+--
+-- TOC entry 2885 (class 2604 OID 17054)
+-- Name: users_comics id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.users_comics ALTER COLUMN id SET DEFAULT nextval('public."UserComics_id_seq"'::regclass);
+
+
+--
+-- TOC entry 2884 (class 2604 OID 16990)
+-- Name: users_details id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.users_details ALTER COLUMN id SET DEFAULT nextval('public."UserDetails_id_seq"'::regclass);
+
+
+--
+-- TOC entry 3029 (class 0 OID 16569)
+-- Dependencies: 200
+-- Data for Name: SequelizeMeta; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."SequelizeMeta" (name) FROM stdin;
+20210312100242-create-user.js
+20210312105438-rename-column-login-to-nickname-in-users.js
+20210317183355-create-comic.js
+20210320122902-add-birth-date-to-user-column.js
+20210402121559-create-user-details.js
+20210421121132-create-stored-image.js
+20210506155129-create-user-comic.js
+20210526093255-create-example.js
+20210531121846-create-review.js
+\.
+
+
+--
+-- TOC entry 3033 (class 0 OID 16976)
+-- Dependencies: 204
+-- Data for Name: comics; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.comics (id, title, cover_image, onsale_date, writer, inker, penciler, description, series_id, created_at, updated_at, linking_url) FROM stdin;
+85579	Iron Man (2020) #3	http://i.annihil.us/u/prod/marvel/i/mg/8/d0/601af74223bdf.jpg	2020-11-11 06:00:00+01	Christopher Cantwell	C Cafu		BIG IRON! Tony Stark is looking to restart his engine. He decides he’s going back to basics, putting away his high-tech toys and high-profile image so he can get his hands dirty again. It’s time to dig into the guts of real machines, put on some old-fashioned metal and fly. But can he really lay that Stark-sized ego down? Life isn’t that simple, something that old friends and frustrating foes are quick to point out. If you strip down a billionaire to his bolts, does he run solid or just overheat? Tony’s going to find out once a threat to the entire universe rears its head from the past. As he suits up again, Tony remains sure of one thing: he’s still IRON MAN down to his flesh and blood core. 	30148	2021-06-14 14:15:27.324+02	2021-09-16 10:03:02.503+02	http://comicstore.marvel.com/Iron-Man-3/digital-comic/55692?utm_campaign=apiRef&utm_source=2e000938355ab5a08959af26a65ae33f
+10800	Spider-Man (1990) #4	http://i.annihil.us/u/prod/marvel/i/mg/d/00/5bc762e97cd7c.jpg	1990-11-10 06:00:00+01				TORMENT PART FOUR Has Kraven the Hunter returned? Has he joined the Lizard? Spider-Man is about to find out the hard way!	2069	2021-06-14 14:18:45.826+02	2021-09-16 10:03:02.505+02	http://comicstore.marvel.com/Spider-Man-4/digital-comic/21918?utm_campaign=apiRef&utm_source=2e000938355ab5a08959af26a65ae33f
+10795	Spider-Man (1990) #35	http://i.annihil.us/u/prod/marvel/i/mg/8/c0/5bc8b01e0069b.jpg	1993-06-10 06:00:00+02	David Michelinie	Scott Hanna		MAXIMUM CARNAGE PART 4 As the battle between good and evil heats up, strange alliances are formed. Can a partnership between Venom and Spider-Man remain stable long enough to take Carnage down?	2069	2021-06-14 14:18:38.383+02	2021-09-16 10:03:02.565+02	http://comicstore.marvel.com/Spider-Man-35/digital-comic/6948?utm_campaign=apiRef&utm_source=2e000938355ab5a08959af26a65ae33f
+85582	Iron Man (2020) #6	http://i.annihil.us/u/prod/marvel/i/mg/8/d0/6026d1a2c7e5b.jpg	2021-02-17 06:00:00+01	Christopher Cantwell	C Cafu		BIG IRON! Tony Stark is looking to restart his engine. He decides he’s going back to basics, putting away his high-tech toys and high-profile image so he can get his hands dirty again. It’s time to dig into the guts of real machines, put on some old-fashioned metal and fly. But can he really lay that Stark-sized ego down? Life isn’t that simple, something that old friends and frustrating foes are quick to point out. If you strip down a billionaire to his bolts, does he run solid or just overheat? Tony’s going to find out once a threat to the entire universe rears its head from the past. As he suits up again, Tony remains sure of one thing: he’s still IRON MAN down to his flesh and blood core. 	30148	2021-06-14 14:14:47.895+02	2021-09-16 10:03:02.636+02	http://comicstore.marvel.com/Iron-Man-6/digital-comic/56153?utm_campaign=apiRef&utm_source=2e000938355ab5a08959af26a65ae33f
+10778	Spider-Man (1990) #2	http://i.annihil.us/u/prod/marvel/i/mg/9/90/5bc761983deb1.jpg	1990-09-10 06:00:00+02				TORMENT PART TWO Peter Parker and Mary Jane are spending some time together when their pleasant evening is interrupted by a news report detailing a new murder, presumably committed by the Lizard. Spidey sets out to investigate! Prepare for a bloody battle!	2069	2021-06-14 14:18:49.572+02	2021-09-16 10:03:03.082+02	http://comicstore.marvel.com/Spider-Man-2/digital-comic/21916?utm_campaign=apiRef&utm_source=284cb61831f90658ed8f8e656311488c
+84369	Black Widow (2020) #5	http://i.annihil.us/u/prod/marvel/i/mg/9/70/6026d186cfbc7.jpg	2021-02-17 06:00:00+01	Kelly Thompson	Elena Casagrande	Adam Hughes	KELLY THOMPSON. BLACK WIDOW. ‘NUFF SAID! Best-selling, Eisner–nominated writer Kelly Thompson (CAPTAIN MARVEL, STAR) and rising star artist Elena Casagrande (Catwoman) launch a new BLACK WIDOW series that changes everything! Natasha Romanoff has been a spy almost as long as she’s been alive. And she’s never stopped running, whether she was working for the good guys…or the bad. But Natasha’s world is about to be upended. Beyond San Francisco’s Golden Gate lies a mystery that only the Marvel Universe’s greatest spy can solve. Don’t miss the heartbreaking thrill ride of 2020!	29700	2021-06-14 14:17:10.432+02	2021-09-16 10:03:03.198+02	http://comicstore.marvel.com/Black-Widow-5/digital-comic/56005?utm_campaign=apiRef&utm_source=2e000938355ab5a08959af26a65ae33f
+18210	X-Man (1995) #4	http://i.annihil.us/u/prod/marvel/i/mg/9/70/596642bec04fb.jpg	1995-06-10 06:00:00+02	Jeph Loeb	Bud Larosa	Steve Skroce	Magneto has been taken prisoner by Apocalypse! Nate Grey battles Sinister! The key to victory is revealed! All in this issue!	3643	2021-06-14 14:18:05.684+02	2021-09-16 10:03:04.212+02	http://comicstore.marvel.com/X-Man-4/digital-comic/7758?utm_campaign=apiRef&utm_source=2e000938355ab5a08959af26a65ae33f
+10855	Spider-Man (1990) #9	http://i.annihil.us/u/prod/marvel/i/mg/9/20/583353fb43dab.jpg	1991-04-10 06:00:00+02	Todd Mcfarlane			The Amazing Spider-Man and the Savage Wolverine combat the carnivorous Wendigo!	2069	2021-06-14 14:19:16.61+02	2021-09-16 10:03:05.059+02	http://comicstore.marvel.com/Spider-Man-9/digital-comic/29675?utm_campaign=apiRef&utm_source=2e000938355ab5a08959af26a65ae33f
+93022	Black Widow (2020) #10	http://i.annihil.us/u/prod/marvel/i/mg/f/d0/60b8f7cfec93b.jpg	2021-08-18 06:00:00+02	Kelly Thompson	Elisabetta D'AMICO	Elena Casagrande	KELLY THOMPSON. BLACK WIDOW. ‘NUFF SAID! Best-selling, Eisner–nominated writer Kelly Thompson (CAPTAIN MARVEL, STAR) and rising star artist Elena Casagrande (Catwoman) launch a new BLACK WIDOW series that changes everything! Natasha Romanoff has been a spy almost as long as she’s been alive. And she’s never stopped running, whether she was working for the good guys…or the bad. But Natasha’s world is about to be upended. Beyond San Francisco’s Golden Gate lies a mystery that only the Marvel Universe’s greatest spy can solve. Don’t miss the heartbreaking thrill ride of 2020!	29700	2021-06-14 14:17:02.529+02	2021-09-16 10:03:06.037+02	http://comicstore.marvel.com/Black-Widow-10/digital-comic/57162?utm_campaign=apiRef&utm_source=2e000938355ab5a08959af26a65ae33f
+84365	Black Widow (2020) #1	http://i.annihil.us/u/prod/marvel/i/mg/c/40/5f3d36dc73d2a.jpg	2020-09-02 06:00:00+02	Kelly Thompson	Elena Casagrande	Adam Hughes	KELLY THOMPSON. BLACK WIDOW. ‘NUFF SAID! Best-selling, Eisner–nominated writer Kelly Thompson (CAPTAIN MARVEL, STAR) and rising star artist Elena Casagrande (Catwoman) launch a new BLACK WIDOW series that changes everything! Natasha Romanoff has been a spy almost as long as she’s been alive. And she’s never stopped running, whether she was working for the good guys…or the bad. But Natasha’s world is about to be upended. Beyond San Francisco’s Golden Gate lies a mystery that only the Marvel Universe’s greatest spy can solve. Don’t miss the heartbreaking thrill ride of 2020!	29700	2021-06-14 14:17:07.244+02	2021-09-16 10:03:06.198+02	http://comicstore.marvel.com/Black-Widow-1/digital-comic/54585?utm_campaign=apiRef&utm_source=2e000938355ab5a08959af26a65ae33f
+80509	Star Wars (2020) #2	http://i.annihil.us/u/prod/marvel/i/mg/1/80/5e289079a8269.jpg	2020-01-29 06:00:00+01	Charles Soule	Jesus Saiz	R.B. Silva	“No…I am your father.” In the wake of the events following The Empire Strikes Back, it is a dark time for the heroes of the Rebellion. The Rebel fleet…scattered following a disastrous defeat at the Battle of Hoth. Han Solo…lost to the bounty hunter, Boba Fett, after being frozen in carbonite. And after being lured into a trap on Cloud City and bested in a vicious lightsaber duel against the evil Darth Vader, Luke Skywalker…learned the horrible truth about his past. Vader did not kill Luke’s father Anakin--Vader is Luke’s father! Now, after narrowly escaping the dark lord’s clutches, and wounded and reeling from the revelation, Luke, Princess Leia, Lando Calrissian, the Wookiee Chewbacca and the droids C-3PO and R2-D2 must fight their way back to the Rebel Alliance—for the fate of the entire galaxy is at stake! After so many losses is victory still possible? But, what Leia, Luke and their rag tag band of freedom fighters do not realize is that they have only traded one Imperial trap for another!	28372	2021-06-14 18:11:28.781+02	2021-09-16 10:03:04.431+02	http://comicstore.marvel.com/Star-Wars-2/digital-comic/53593?utm_campaign=apiRef&utm_source=2e000938355ab5a08959af26a65ae33f
+80521	Star Wars (2020) #12	http://i.annihil.us/u/prod/marvel/i/mg/6/00/603d21d04f88a.jpg	2021-03-10 06:00:00+01	Charles Soule	Jason Paz	Carlo Pagulayan	“No…I am your father.” In the wake of the events following The Empire Strikes Back, it is a dark time for the heroes of the Rebellion. The Rebel fleet…scattered following a disastrous defeat at the Battle of Hoth. Han Solo…lost to the bounty hunter, Boba Fett, after being frozen in carbonite. And after being lured into a trap on Cloud City and bested in a vicious lightsaber duel against the evil Darth Vader, Luke Skywalker…learned the horrible truth about his past. Vader did not kill Luke’s father Anakin--Vader is Luke’s father! Now, after narrowly escaping the dark lord’s clutches, and wounded and reeling from the revelation, Luke, Princess Leia, Lando Calrissian, the Wookiee Chewbacca and the droids C-3PO and R2-D2 must fight their way back to the Rebel Alliance—for the fate of the entire galaxy is at stake! After so many losses is victory still possible? But, what Leia, Luke and their rag tag band of freedom fighters do not realize is that they have only traded one Imperial trap for another!	28372	2021-06-14 18:10:55.69+02	2021-09-16 10:03:04.671+02	http://comicstore.marvel.com/Star-Wars-12/digital-comic/56419?utm_campaign=apiRef&utm_source=2e000938355ab5a08959af26a65ae33f
+80511	Star Wars (2020) #3	http://i.annihil.us/u/prod/marvel/i/mg/9/40/5e28a3f4e7a40.jpg	2020-02-26 06:00:00+01	Charles Soule	Jesus Saiz	R.B. Silva	“No…I am your father.” In the wake of the events following The Empire Strikes Back, it is a dark time for the heroes of the Rebellion. The Rebel fleet…scattered following a disastrous defeat at the Battle of Hoth. Han Solo…lost to the bounty hunter, Boba Fett, after being frozen in carbonite. And after being lured into a trap on Cloud City and bested in a vicious lightsaber duel against the evil Darth Vader, Luke Skywalker…learned the horrible truth about his past. Vader did not kill Luke’s father Anakin--Vader is Luke’s father! Now, after narrowly escaping the dark lord’s clutches, and wounded and reeling from the revelation, Luke, Princess Leia, Lando Calrissian, the Wookiee Chewbacca and the droids C-3PO and R2-D2 must fight their way back to the Rebel Alliance—for the fate of the entire galaxy is at stake! After so many losses is victory still possible? But, what Leia, Luke and their rag tag band of freedom fighters do not realize is that they have only traded one Imperial trap for another!	28372	2021-06-14 18:11:14.005+02	2021-09-16 10:03:05.067+02	http://comicstore.marvel.com/Star-Wars-3/digital-comic/54011?utm_campaign=apiRef&utm_source=2e000938355ab5a08959af26a65ae33f
+85577	Iron Man (2020) #1	http://i.annihil.us/u/prod/marvel/i/mg/7/30/5f594309d8c6d.jpg	2020-09-16 06:00:00+02	Christopher Cantwell	C Cafu		BIG IRON! Tony Stark is looking to restart his engine. He decides he’s going back to basics, putting away his high-tech toys and high-profile image so he can get his hands dirty again. It’s time to dig into the guts of real machines, put on some old-fashioned metal and fly. But can he really lay that Stark-sized ego down? Life isn’t that simple, something that old friends and frustrating foes are quick to point out. If you strip down a billionaire to his bolts, does he run solid or just overheat? Tony’s going to find out once a threat to the entire universe rears its head from the past. As he suits up again, Tony remains sure of one thing: he’s still IRON MAN down to his flesh and blood core. 	30148	2021-06-23 19:29:59.777+02	2021-09-16 10:03:05.188+02	http://comicstore.marvel.com/Iron-Man-1/digital-comic/55413?utm_campaign=apiRef&utm_source=2e000938355ab5a08959af26a65ae33f
+10844	Spider-Man (1990) #8	http://i.annihil.us/u/prod/marvel/i/mg/8/d0/583352acdf0b2.jpg	1991-03-10 06:00:00+01	Todd Mcfarlane			Spider-Man confronts the wild Wendigo. Wolverine guest-stars as the mythic monster makes a mess!	2069	2021-06-14 14:19:20.652+02	2021-09-16 10:03:05.205+02	http://comicstore.marvel.com/Spider-Man-8/digital-comic/29674?utm_campaign=apiRef&utm_source=2e000938355ab5a08959af26a65ae33f
+10833	Spider-Man (1990) #7	http://i.annihil.us/u/prod/marvel/i/mg/3/10/583352420af6c.jpg	1991-02-10 06:00:00+01				The stunning conclusion to MASQUES! Will Ghost Rider and Spider-Man be able to set aside their differences to take down the Hobgoblin?	2069	2021-06-14 14:19:26.902+02	2021-09-16 10:03:05.521+02	http://comicstore.marvel.com/Spider-Man-7/digital-comic/29673?utm_campaign=apiRef&utm_source=2e000938355ab5a08959af26a65ae33f
+85578	Iron Man (2020) #2	http://i.annihil.us/u/prod/marvel/i/mg/e/e0/5f3ee0a28b2bd.jpg	2020-10-21 06:00:00+02	Christopher Cantwell	C Cafu		BIG IRON! Tony Stark is looking to restart his engine. He decides he’s going back to basics, putting away his high-tech toys and high-profile image so he can get his hands dirty again. It’s time to dig into the guts of real machines, put on some old-fashioned metal and fly. But can he really lay that Stark-sized ego down? Life isn’t that simple, something that old friends and frustrating foes are quick to point out. If you strip down a billionaire to his bolts, does he run solid or just overheat? Tony’s going to find out once a threat to the entire universe rears its head from the past. As he suits up again, Tony remains sure of one thing: he’s still IRON MAN down to his flesh and blood core. 	30148	2021-06-14 14:19:42.734+02	2021-09-16 10:03:06.052+02	http://comicstore.marvel.com/Iron-Man-2/digital-comic/55557?utm_campaign=apiRef&utm_source=2e000938355ab5a08959af26a65ae33f
+67762	Avengers (2018) #5	http://i.annihil.us/u/prod/marvel/i/mg/1/30/5b4674595743e.jpg	2018-07-18 06:00:00+02	Jason Aaron	Mark Morales	Ed Mcguinness	Behold the wildest, most awe-inspiring team of Avengers ever assembled! But will it be enough to defeat the combined powers of Loki and the Final Host of Dark Celestials? And what is the startling secret of the Progenitor?	24229	2021-06-24 11:47:48.957+02	2021-09-16 10:03:02.508+02	http://comicstore.marvel.com/Avengers-5/digital-comic/48536?utm_campaign=apiRef&utm_source=2e000938355ab5a08959af26a65ae33f
+90140	X-Force (2019) #22	http://i.annihil.us/u/prod/marvel/i/mg/3/20/6104118fa735f.jpg	2021-08-11 06:00:00+02	Benjamin Percy		Joshua Cassara		27564	2021-08-12 12:07:00.261+02	2021-09-16 10:03:02.569+02	http://comicstore.marvel.com/X-Force-22/digital-comic/57216?utm_campaign=apiRef&utm_source=2e000938355ab5a08959af26a65ae33f
+85584	Iron Man (2020) #8	http://i.annihil.us/u/prod/marvel/i/mg/5/d0/6066104ab59ac.jpg	2021-04-14 06:00:00+02	Christopher Cantwell	Angel Unzueta		BIG IRON! Tony Stark is looking to restart his engine. He decides he’s going back to basics, putting away his high-tech toys and high-profile image so he can get his hands dirty again. It’s time to dig into the guts of real machines, put on some old-fashioned metal and fly. But can he really lay that Stark-sized ego down? Life isn’t that simple, something that old friends and frustrating foes are quick to point out. If you strip down a billionaire to his bolts, does he run solid or just overheat? Tony’s going to find out once a threat to the entire universe rears its head from the past. As he suits up again, Tony remains sure of one thing: he’s still IRON MAN down to his flesh and blood core. 	30148	2021-06-24 17:19:12.592+02	2021-09-16 10:03:02.663+02	http://comicstore.marvel.com/Iron-Man-8/digital-comic/56504?utm_campaign=apiRef&utm_source=2e000938355ab5a08959af26a65ae33f
+18226	X-Man (1995) #54	http://i.annihil.us/u/prod/marvel/i/mg/2/10/596649e76d199.jpg	1999-08-01 06:00:00+02	Terry Kavanagh	Bud Larosa	Luke Ross		3643	2021-08-11 09:35:54.252+02	2021-09-16 10:03:03.023+02	http://comicstore.marvel.com/X-Man-54/digital-comic/7760?utm_campaign=apiRef&utm_source=2e000938355ab5a08959af26a65ae33f
+67767	Avengers (2018) #10	http://i.annihil.us/u/prod/marvel/i/mg/b/c0/5be372403dabe.jpg	2018-11-14 06:00:00+01	Jason Aaron	Adam Kubert	Frazer Irving	 THE EARTH’S MOST HATED HEROES?! After 700 issues of saving the world, you’d think the Avengers would be due some celebration. But instead the whole world seems to be gunning for them, especially Namor’s fearsome new Defenders of the Deep and the reimagined Russian Super-Soldiers of the Winter Guard. And that’s not to mention the shocking surprise the U.S. government has in store for our heroes. Plus: The all-new Agents of Wakanda! The mystery of the Avengers of 1,000,000 BC deepens! A key revelation concerning the resurrection of Wolverine! And the next startling new Avenger is revealed! 	24229	2021-06-24 11:47:52.753+02	2021-09-16 10:03:03.105+02	http://comicstore.marvel.com/Avengers-10/digital-comic/49747?utm_campaign=apiRef&utm_source=2e000938355ab5a08959af26a65ae33f
+21564	Eternals (2008) #2	http://i.annihil.us/u/prod/marvel/i/mg/7/00/57d86b584d4a5.jpg	2008-07-09 06:00:00+02	Charles Knauf			The powerful Eternals stand divided as they race to awaken the missing members of their race!  On one side, the power of Ikaris and Thena, guided by Makaari and his connection with the dreaming Celestial!  On the other, the dark lord of Vorozheika, the dreaded Druig, finding his lost kin through means unknown!  But on whose side does Ajak, the celestial's former liaison, fall?  \rPlus: appearances by the Invincible Iron Man and The Order!\rRated T+ ...$2.99\r	5022	2021-08-12 12:07:54.787+02	2021-09-16 10:03:04.667+02	http://marvel.com/comics/issue/21564/eternals_2008_2?utm_campaign=apiRef&utm_source=2e000938355ab5a08959af26a65ae33f
+10822	Spider-Man (1990) #6	http://i.annihil.us/u/prod/marvel/i/mg/3/b0/583351b65b79b.jpg	1991-01-10 06:00:00+01				The Hobgoblin is losing his mind, and it's up to Spider-Man and Ghost Rider to stop his demonic rampage! Will the Webbed Wonder and the Spirit of Vengeance defeat this vile villain?	2069	2021-07-07 09:19:33.591+02	2021-09-16 10:03:05.006+02	http://comicstore.marvel.com/Spider-Man-6/digital-comic/29672?utm_campaign=apiRef&utm_source=2e000938355ab5a08959af26a65ae33f
+93018	Black Widow (2020) #6	http://i.annihil.us/u/prod/marvel/i/mg/9/20/607717bae5be1.jpg	2021-04-28 06:00:00+02	Kelly Thompson	Rafael De Latorre	Adam Hughes	KELLY THOMPSON. BLACK WIDOW. ‘NUFF SAID! Best-selling, Eisner–nominated writer Kelly Thompson (CAPTAIN MARVEL, STAR) and rising star artist Elena Casagrande (Catwoman) launch a new BLACK WIDOW series that changes everything! Natasha Romanoff has been a spy almost as long as she’s been alive. And she’s never stopped running, whether she was working for the good guys…or the bad. But Natasha’s world is about to be upended. Beyond San Francisco’s Golden Gate lies a mystery that only the Marvel Universe’s greatest spy can solve. Don’t miss the heartbreaking thrill ride of 2020!	29700	2021-06-24 17:21:43.611+02	2021-09-16 10:03:05.493+02	http://comicstore.marvel.com/Black-Widow-6/digital-comic/56488?utm_campaign=apiRef&utm_source=284cb61831f90658ed8f8e656311488c
+85586	Iron Man (2020) #10	http://i.annihil.us/u/prod/marvel/i/mg/f/90/60a530c824620.jpg	2021-07-14 06:00:00+02	Christopher Cantwell	C Cafu		BIG IRON! Tony Stark is looking to restart his engine. He decides he’s going back to basics, putting away his high-tech toys and high-profile image so he can get his hands dirty again. It’s time to dig into the guts of real machines, put on some old-fashioned metal and fly. But can he really lay that Stark-sized ego down? Life isn’t that simple, something that old friends and frustrating foes are quick to point out. If you strip down a billionaire to his bolts, does he run solid or just overheat? Tony’s going to find out once a threat to the entire universe rears its head from the past. As he suits up again, Tony remains sure of one thing: he’s still IRON MAN down to his flesh and blood core. 	30148	2021-06-24 11:45:58.242+02	2021-09-16 10:03:05.715+02	http://comicstore.marvel.com/Iron-Man-10/digital-comic/57053?utm_campaign=apiRef&utm_source=284cb61831f90658ed8f8e656311488c
+18244	X-Man (1995) #70	http://i.annihil.us/u/prod/marvel/i/mg/c/e0/57718f3eaca9e.jpg	2000-12-01 06:00:00+01					3643	2021-07-07 09:20:35.816+02	2021-09-16 10:03:06.028+02	http://marvel.com/comics/issue/18244/x-man_1995_70?utm_campaign=apiRef&utm_source=284cb61831f90658ed8f8e656311488c
+84361	Avengers (2018) #43	http://i.annihil.us/u/prod/marvel/i/mg/b/50/60341a35cdbca.jpg	2021-03-03 06:00:00+01	Jason Aaron	Javier Garron	Leinil Francis Yu		24229	2021-06-24 11:47:44.629+02	2021-09-16 10:03:06.389+02	http://comicstore.marvel.com/Avengers-43/digital-comic/56386?utm_campaign=apiRef&utm_source=2e000938355ab5a08959af26a65ae33f
+78685	Guardians of the Galaxy (2020) #3	http://i.annihil.us/u/prod/marvel/i/mg/4/c0/5e67bd7569883.jpg	2020-03-18 05:00:00+01	Al Ewing	Juann Cabal	Belen Ortega	Once, they were a team of misfits. Now they’re a family, and they’ve earned their peace. But the universe is not a peaceful place -- and it’s only getting worse. The Great Empires are in turmoil. The rule of law is dead. And amidst the chaos, the Gods of Olympus have returned -- harbingers of a new age of war, reborn to burn their mark on the stars themselves. Someone has to guard the galaxy - but who will accept the mission? And will they survive it? Al Ewing (IMMORTAL HULK) and Juann Cabal (FRIENDLY NEIGHBORHOOD SPIDER-MAN) bring you in on the ground floor of a whole Marvel Universe of action and suspense!	28042	2021-08-12 16:33:00.004+02	2021-09-16 10:03:03.324+02	http://comicstore.marvel.com/Guardians-of-the-Galaxy-3/digital-comic/54265?utm_campaign=apiRef&utm_source=2e000938355ab5a08959af26a65ae33f
+93019	Black Widow (2020) #7	http://i.annihil.us/u/prod/marvel/i/mg/b/d0/60afe2f70cd22.jpg	2021-05-26 06:00:00+02	Kelly Thompson	Elena Casagrande	Adam Hughes	KELLY THOMPSON. BLACK WIDOW. ‘NUFF SAID! Best-selling, Eisner–nominated writer Kelly Thompson (CAPTAIN MARVEL, STAR) and rising star artist Elena Casagrande (Catwoman) launch a new BLACK WIDOW series that changes everything! Natasha Romanoff has been a spy almost as long as she’s been alive. And she’s never stopped running, whether she was working for the good guys…or the bad. But Natasha’s world is about to be upended. Beyond San Francisco’s Golden Gate lies a mystery that only the Marvel Universe’s greatest spy can solve. Don’t miss the heartbreaking thrill ride of 2020!	29700	2021-08-13 11:38:46.21+02	2021-09-16 10:03:03.721+02	http://comicstore.marvel.com/Black-Widow-7/digital-comic/56786?utm_campaign=apiRef&utm_source=2e000938355ab5a08959af26a65ae33f
+78686	Guardians of the Galaxy (2020) #4	http://i.annihil.us/u/prod/marvel/i/mg/6/c0/5e9e0777e20d3.jpg	2020-07-15 06:00:00+02	Al Ewing	Juann Cabal	Ivan Shavrin		28042	2021-08-12 16:33:41.831+02	2021-09-16 10:03:03.989+02	http://comicstore.marvel.com/Guardians-of-the-Galaxy-4/digital-comic/54618?utm_campaign=apiRef&utm_source=2e000938355ab5a08959af26a65ae33f
+78690	Guardians of the Galaxy (2020) #8	http://i.annihil.us/u/prod/marvel/i/mg/9/a0/601af77f6d29b.jpg	2020-11-04 06:00:00+01	Al Ewing	Marcio Takara	Rafael Albuquerque	Once, they were a team of misfits. Now they’re a family, and they’ve earned their peace. But the universe is not a peaceful place -- and it’s only getting worse. The Great Empires are in turmoil. The rule of law is dead. And amidst the chaos, the Gods of Olympus have returned -- harbingers of a new age of war, reborn to burn their mark on the stars themselves. Someone has to guard the galaxy - but who will accept the mission? And will they survive it? Al Ewing (IMMORTAL HULK) and Juann Cabal (FRIENDLY NEIGHBORHOOD SPIDER-MAN) bring you in on the ground floor of a whole Marvel Universe of action and suspense!	28042	2021-08-13 11:41:49.128+02	2021-09-16 10:03:04.814+02	http://comicstore.marvel.com/Guardians-of-the-Galaxy-8/digital-comic/55689?utm_campaign=apiRef&utm_source=2e000938355ab5a08959af26a65ae33f
+90136	X-Force (2019) #18	http://i.annihil.us/u/prod/marvel/i/mg/d/90/60464e1641397.jpg	2021-03-17 05:00:00+01	Benjamin Percy	Garry Brown	Joshua Cassara		27564	2021-08-13 12:42:46.846+02	2021-09-16 10:03:05.024+02	http://comicstore.marvel.com/X-Force-18/digital-comic/56431?utm_campaign=apiRef&utm_source=2e000938355ab5a08959af26a65ae33f
+21759	Eternals (2008) #3	http://i.annihil.us/u/prod/marvel/i/mg/b/d0/57d86b01ea0bc.jpg	2008-08-06 06:00:00+02	Charles Knauf			The clock is ticking. The end is near. The Eternals race to awaken their bretheren defeat the coming Horde!  But who will\rawaken... the Forgotten One?  Plus, the enormous outcast Space-God known as the Dreaming Celestial stands towering over San Francisco's Golden Gate Park since he rose from his prison beneath the Diablo Mountains...but just how was such a powerful being imprisoned?  Find out herein!\rRated T+ ...$2.99\r	5022	2021-08-12 12:08:01.224+02	2021-09-16 10:03:05.693+02	http://marvel.com/comics/issue/21759/eternals_2008_3?utm_campaign=apiRef&utm_source=2e000938355ab5a08959af26a65ae33f
+89563	Captain Marvel (2019) #29	http://i.annihil.us/u/prod/marvel/i/mg/e/f0/60cd0f47afb6a.jpg	2021-06-23 06:00:00+02	Kelly Thompson	Jacopo Camagni	Marco Checchetto	Get ready to go futher, faster and farther with Captain Marvel! Learn all you need to know about former-pilot-turned-super-hero Carol Danvers and what are the essential comic stories of Captain Marvel! If you want the best of the best, start here!	26673	2021-08-13 12:45:12.565+02	2021-09-16 10:03:05.718+02	http://comicstore.marvel.com/Captain-Marvel-29/digital-comic/56876?utm_campaign=apiRef&utm_source=2e000938355ab5a08959af26a65ae33f
+93020	Black Widow (2020) #8	http://i.annihil.us/u/prod/marvel/i/mg/4/50/609ece2894980.jpg	2021-06-30 06:00:00+02	Kelly Thompson	Elisabetta D'AMICO	Elena Casagrande	KELLY THOMPSON. BLACK WIDOW. ‘NUFF SAID! Best-selling, Eisner–nominated writer Kelly Thompson (CAPTAIN MARVEL, STAR) and rising star artist Elena Casagrande (Catwoman) launch a new BLACK WIDOW series that changes everything! Natasha Romanoff has been a spy almost as long as she’s been alive. And she’s never stopped running, whether she was working for the good guys…or the bad. But Natasha’s world is about to be upended. Beyond San Francisco’s Golden Gate lies a mystery that only the Marvel Universe’s greatest spy can solve. Don’t miss the heartbreaking thrill ride of 2020!	29700	2021-08-12 16:16:20.077+02	2021-09-16 10:03:06.511+02	http://comicstore.marvel.com/Black-Widow-8/digital-comic/56984?utm_campaign=apiRef&utm_source=2e000938355ab5a08959af26a65ae33f
+23127	Eternals (2008) #7	http://i.annihil.us/u/prod/marvel/i/mg/4/b0/57d86a9994d26.jpg	2009-01-07 06:00:00+01	Charles Knauf			Ikaris makes a huge move as the next arc in our cosmic adventure begins! As the drastically approaching Horde legion moves ever closer to Earth, Druig and Ikaris' ageless hatred towards one another finally explodes! Pacts are broken, alliances are shaped, lines are drawn, and Eternal blood will flow on the Marvel landscape! Don't miss this jumping on point, dear reader, as the goldern-haired Eternal breaks from the pact to become a star!  \rRated T+ ...$2.99\r	5022	2021-08-12 12:08:06.803+02	2021-09-16 10:03:06.719+02	http://marvel.com/comics/issue/23127/eternals_2008_7?utm_campaign=apiRef&utm_source=2e000938355ab5a08959af26a65ae33f
+66114	Spider-Man (2016) #237	http://i.annihil.us/u/prod/marvel/i/mg/3/10/5a7245a053a77.jpg	2018-02-07 06:00:00+01	Brian Michael Bendis	Jan Bazaldua	Patrick Brown	SANDMAN doesn’t trust the leader of the new Sinister Six, and he’s ready to take matters into his own sands! Can SPIDER-MAN contain him AND fend off IRON SPIDER, who won’t ignore his vendetta against Miles and his family any longer?	20508	2021-06-14 14:18:26.192+02	2021-09-16 10:03:02.488+02	http://comicstore.marvel.com/Spider-Man-237/digital-comic/47268?utm_campaign=apiRef&utm_source=2e000938355ab5a08959af26a65ae33f
+85581	Iron Man (2020) #5	http://i.annihil.us/u/prod/marvel/i/mg/6/60/5ff32d1157a75.jpg	2021-01-06 06:00:00+01	Christopher Cantwell	C Cafu		BIG IRON! Tony Stark is looking to restart his engine. He decides he’s going back to basics, putting away his high-tech toys and high-profile image so he can get his hands dirty again. It’s time to dig into the guts of real machines, put on some old-fashioned metal and fly. But can he really lay that Stark-sized ego down? Life isn’t that simple, something that old friends and frustrating foes are quick to point out. If you strip down a billionaire to his bolts, does he run solid or just overheat? Tony’s going to find out once a threat to the entire universe rears its head from the past. As he suits up again, Tony remains sure of one thing: he’s still IRON MAN down to his flesh and blood core. 	30148	2021-06-14 14:15:19.498+02	2021-09-16 10:03:02.5+02	http://comicstore.marvel.com/Iron-Man-5/digital-comic/56023?utm_campaign=apiRef&utm_source=2e000938355ab5a08959af26a65ae33f
+89677	Iron Man (2020) #11	http://i.annihil.us/u/prod/marvel/i/mg/b/d0/60e5e1bdbe135.jpg	2021-08-18 06:00:00+02	Christopher Cantwell	Angel Unzueta		BIG IRON! Tony Stark is looking to restart his engine. He decides he’s going back to basics, putting away his high-tech toys and high-profile image so he can get his hands dirty again. It’s time to dig into the guts of real machines, put on some old-fashioned metal and fly. But can he really lay that Stark-sized ego down? Life isn’t that simple, something that old friends and frustrating foes are quick to point out. If you strip down a billionaire to his bolts, does he run solid or just overheat? Tony’s going to find out once a threat to the entire universe rears its head from the past. As he suits up again, Tony remains sure of one thing: he’s still IRON MAN down to his flesh and blood core. 	30148	2021-08-12 11:58:00.166+02	2021-09-16 10:03:02.507+02	http://comicstore.marvel.com/Iron-Man-11/digital-comic/57179?utm_campaign=apiRef&utm_source=2e000938355ab5a08959af26a65ae33f
+85585	Iron Man (2020) #9	http://i.annihil.us/u/prod/marvel/i/mg/9/40/60afe2679ac23.jpg	2021-06-09 06:00:00+02	Christopher Cantwell	C Cafu		BIG IRON! Tony Stark is looking to restart his engine. He decides he’s going back to basics, putting away his high-tech toys and high-profile image so he can get his hands dirty again. It’s time to dig into the guts of real machines, put on some old-fashioned metal and fly. But can he really lay that Stark-sized ego down? Life isn’t that simple, something that old friends and frustrating foes are quick to point out. If you strip down a billionaire to his bolts, does he run solid or just overheat? Tony’s going to find out once a threat to the entire universe rears its head from the past. As he suits up again, Tony remains sure of one thing: he’s still IRON MAN down to his flesh and blood core. 	30148	2021-06-14 14:15:02.767+02	2021-09-16 10:03:02.525+02	http://comicstore.marvel.com/Iron-Man-9/digital-comic/56899?utm_campaign=apiRef&utm_source=2e000938355ab5a08959af26a65ae33f
+81178	Ant-Man (2020) #2	http://i.annihil.us/u/prod/marvel/i/mg/4/20/5e4c3648529d7.jpg	2020-02-26 06:00:00+01	Zeb Wells	Dylan Burnett	Eduard Petrovich	SWARM APPROACHES! Scott Lang is back and doing better than ever! Er, at least according to him, but his daughter, Stinger, and the anthill he’s living in say otherwise. Desperate to raise his daughter’s opinion of him, Scott takes a job from local beekeepers only to uncover a global conspiracy that could topple the world order! No time to call the Avengers, this sounds like a job for – ANT-MAN?! Join the explosive creative team of Zeb Wells (NOVA) and Dylan Burnett (X-FORCE, COSMIC GHOST RIDER) as they take Ant-Man to all-new heights in this epic adventure! 	29032	2021-06-24 11:50:33.453+02	2021-09-16 10:03:02.527+02	http://comicstore.marvel.com/Ant-Man-2/digital-comic/53930?utm_campaign=apiRef&utm_source=2e000938355ab5a08959af26a65ae33f
+84366	Black Widow (2020) #2	http://i.annihil.us/u/prod/marvel/i/mg/6/f0/5f735c594a0e9.jpg	2020-10-07 06:00:00+02	Kelly Thompson	Elena Casagrande	Adam Hughes	KELLY THOMPSON. BLACK WIDOW. ‘NUFF SAID! Best-selling, Eisner–nominated writer Kelly Thompson (CAPTAIN MARVEL, STAR) and rising star artist Elena Casagrande (Catwoman) launch a new BLACK WIDOW series that changes everything! Natasha Romanoff has been a spy almost as long as she’s been alive. And she’s never stopped running, whether she was working for the good guys…or the bad. But Natasha’s world is about to be upended. Beyond San Francisco’s Golden Gate lies a mystery that only the Marvel Universe’s greatest spy can solve. Don’t miss the heartbreaking thrill ride of 2020!	29700	2021-08-13 12:48:11.06+02	2021-09-16 10:03:02.638+02	http://comicstore.marvel.com/Black-Widow-2/digital-comic/54857?utm_campaign=apiRef&utm_source=2e000938355ab5a08959af26a65ae33f
+89678	Iron Man (2020) #12	http://i.annihil.us/u/prod/marvel/i/mg/6/03/612e8d6233490.jpg	2021-09-15 06:00:00+02	Christopher Cantwell	Angel Unzueta		BIG IRON! Tony Stark is looking to restart his engine. He decides he’s going back to basics, putting away his high-tech toys and high-profile image so he can get his hands dirty again. It’s time to dig into the guts of real machines, put on some old-fashioned metal and fly. But can he really lay that Stark-sized ego down? Life isn’t that simple, something that old friends and frustrating foes are quick to point out. If you strip down a billionaire to his bolts, does he run solid or just overheat? Tony’s going to find out once a threat to the entire universe rears its head from the past. As he suits up again, Tony remains sure of one thing: he’s still IRON MAN down to his flesh and blood core. 	30148	2021-09-13 09:48:10.063+02	2021-09-16 10:03:05.725+02	http://comicstore.marvel.com/Iron-Man-12/digital-comic/57668?utm_campaign=apiRef&utm_source=2e000938355ab5a08959af26a65ae33f
+27581	Punisher (2009) #13	http://i.annihil.us/u/prod/marvel/i/mg/9/f0/582cb97c7c7b4.jpg	2010-01-27 06:00:00+01	Rick Remender		Michael Mckone	FRANKEN-CASTLE PART 3 Trapped in the dank tunnels under New York, surrounded by a team of monster hunters, filthy in the blood of his friends, Frank Castle turns, lifts a giant rifle and smiles. Frank's been through hell -- time to give a little back.	6601	2021-08-13 12:50:31.724+02	2021-09-16 10:03:06.704+02	http://comicstore.marvel.com/Punisher-13/digital-comic/17482?utm_campaign=apiRef&utm_source=2e000938355ab5a08959af26a65ae33f
+362	Inhumans (2003) #9	http://i.annihil.us/u/prod/marvel/i/mg/9/f0/580fe4f85a26f.jpg	2004-02-04 06:00:00+01	Sean Mckeever	Nelson Decastro		"NO MATTER THE COST" pts. 1 & 2 (of 4)\r\nA spoiled, boorish college guy is courting Nahrees, much to her dismay. The harder she pushes him away the more he wants her! Also, Tonaja comes to realize that her Inhuman beauty doesn't translate so well on Earth.\r\n32 PGS. (each)/MARVEL PSR...$2.99 (each)	637	2021-06-14 14:21:28.287+02	2021-09-16 10:03:02.925+02	http://comicstore.marvel.com/Inhumans-9/digital-comic/2030?utm_campaign=apiRef&utm_source=2e000938355ab5a08959af26a65ae33f
+80507	Star Wars (2020) #1	http://i.annihil.us/u/prod/marvel/i/mg/9/c0/5e00d9d4e3e96.jpg	2020-01-01 06:00:00+01	Charles Soule	Steve Mcniven	R.B. Silva	“No…I am your father.” In the wake of the events following The Empire Strikes Back, it is a dark time for the heroes of the Rebellion. The Rebel fleet…scattered following a disastrous defeat at the Battle of Hoth. Han Solo…lost to the bounty hunter, Boba Fett, after being frozen in carbonite. And after being lured into a trap on Cloud City and bested in a vicious lightsaber duel against the evil Darth Vader, Luke Skywalker…learned the horrible truth about his past. Vader did not kill Luke’s father Anakin--Vader is Luke’s father! Now, after narrowly escaping the dark lord’s clutches, and wounded and reeling from the revelation, Luke, Princess Leia, Lando Calrissian, the Wookiee Chewbacca and the droids C-3PO and R2-D2 must fight their way back to the Rebel Alliance—for the fate of the entire galaxy is at stake! After so many losses is victory still possible? But, what Leia, Luke and their rag tag band of freedom fighters do not realize is that they have only traded one Imperial trap for another!	28372	2021-06-14 18:11:08.805+02	2021-09-16 10:03:03.132+02	http://comicstore.marvel.com/Star-Wars-1/digital-comic/53592?utm_campaign=apiRef&utm_source=2e000938355ab5a08959af26a65ae33f
+78694	Guardians of the Galaxy (2020) #12	http://i.annihil.us/u/prod/marvel/i/mg/c/30/605cee7f4e1c0.jpg	2021-03-24 05:00:00+01	Al Ewing	Juann Cabal	Rafael Albuquerque	Once, they were a team of misfits. Now they’re a family, and they’ve earned their peace. But the universe is not a peaceful place -- and it’s only getting worse. The Great Empires are in turmoil. The rule of law is dead. And amidst the chaos, the Gods of Olympus have returned -- harbingers of a new age of war, reborn to burn their mark on the stars themselves. Someone has to guard the galaxy - but who will accept the mission? And will they survive it? Al Ewing (IMMORTAL HULK) and Juann Cabal (FRIENDLY NEIGHBORHOOD SPIDER-MAN) bring you in on the ground floor of a whole Marvel Universe of action and suspense!	28042	2021-08-13 11:48:14.18+02	2021-09-16 10:03:04.175+02	http://comicstore.marvel.com/Guardians-of-the-Galaxy-12/digital-comic/56401?utm_campaign=apiRef&utm_source=2e000938355ab5a08959af26a65ae33f
+92236	Guardians of the Galaxy (2020) #15	http://i.annihil.us/u/prod/marvel/i/mg/9/20/60cd0f44b862d.jpg	2021-06-23 06:00:00+02	Al Ewing	Adelso Corona	Brett Booth	Once, they were a team of misfits. Now they’re a family, and they’ve earned their peace. But the universe is not a peaceful place -- and it’s only getting worse. The Great Empires are in turmoil. The rule of law is dead. And amidst the chaos, the Gods of Olympus have returned -- harbingers of a new age of war, reborn to burn their mark on the stars themselves. Someone has to guard the galaxy - but who will accept the mission? And will they survive it? Al Ewing (IMMORTAL HULK) and Juann Cabal (FRIENDLY NEIGHBORHOOD SPIDER-MAN) bring you in on the ground floor of a whole Marvel Universe of action and suspense!	28042	2021-06-25 10:26:16.163+02	2021-09-16 10:03:04.876+02	http://comicstore.marvel.com/Guardians-of-the-Galaxy-15/digital-comic/56886?utm_campaign=apiRef&utm_source=2e000938355ab5a08959af26a65ae33f
+92237	Guardians of the Galaxy (2020) #16	http://i.annihil.us/u/prod/marvel/i/mg/6/d0/60fad3864b875.jpg	2021-07-21 06:00:00+02	Al Ewing	Adelso Corona	Brett Booth	Once, they were a team of misfits. Now they’re a family, and they’ve earned their peace. But the universe is not a peaceful place -- and it’s only getting worse. The Great Empires are in turmoil. The rule of law is dead. And amidst the chaos, the Gods of Olympus have returned -- harbingers of a new age of war, reborn to burn their mark on the stars themselves. Someone has to guard the galaxy - but who will accept the mission? And will they survive it? Al Ewing (IMMORTAL HULK) and Juann Cabal (FRIENDLY NEIGHBORHOOD SPIDER-MAN) bring you in on the ground floor of a whole Marvel Universe of action and suspense!	28042	2021-08-13 17:16:02.464+02	2021-09-16 10:03:05.721+02	http://comicstore.marvel.com/Guardians-of-the-Galaxy-16/digital-comic/57050?utm_campaign=apiRef&utm_source=2e000938355ab5a08959af26a65ae33f
+92238	Guardians of the Galaxy (2020) #17	http://i.annihil.us/u/prod/marvel/i/mg/9/50/60e5e1a39a5c8.jpg	2021-08-18 06:00:00+02	Al Ewing	Adelso Corona	Brett Booth	Once, they were a team of misfits. Now they’re a family, and they’ve earned their peace. But the universe is not a peaceful place -- and it’s only getting worse. The Great Empires are in turmoil. The rule of law is dead. And amidst the chaos, the Gods of Olympus have returned -- harbingers of a new age of war, reborn to burn their mark on the stars themselves. Someone has to guard the galaxy - but who will accept the mission? And will they survive it? Al Ewing (IMMORTAL HULK) and Juann Cabal (FRIENDLY NEIGHBORHOOD SPIDER-MAN) bring you in on the ground floor of a whole Marvel Universe of action and suspense!	28042	2021-08-12 16:16:37.737+02	2021-09-16 10:03:05.887+02	http://comicstore.marvel.com/Guardians-of-the-Galaxy-17/digital-comic/57175?utm_campaign=apiRef&utm_source=2e000938355ab5a08959af26a65ae33f
+\.
+
+
+--
+-- TOC entry 3039 (class 0 OID 17072)
+-- Dependencies: 210
+-- Data for Name: reviews; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.reviews (id, comic_id, user_id, text, created_at, updated_at) FROM stdin;
+37	85582	16	In lacinia felis elit, a aliquet arcu hendrerit quis. Nulla euismod diam sed eleifend tempus. Donec at consequat ligula. Donec fermentum vulputate purus, et elementum velit semper in. Nullam nibh ante, fringilla a viverra id, imperdiet ac dolor. Sed nec ligula a velit porttitor imperdiet. Nam posuere varius lectus maximus bibendum. Curabitur lobortis venenatis eros eget consectetur. Vivamus iaculis diam bibendum nibh gravida laoreet. Praesent cursus, ante sed porta elementum, tortor justo ullamcorper risus, ut vestibulum elit diam vel leo. Vivamus sit amet faucibus odio, quis semper nulla. Nulla faucibus eu elit sit amet elementum. Nulla pretium est vel risus varius placerat.	2021-06-24 11:49:11.423+02	2021-06-24 11:49:11.423+02
+38	85584	70	Nullam eu orci ex. Morbi sit amet hendrerit quam. Aenean sit amet mi egestas, feugiat magna quis, efficitur lorem. Nunc gravida arcu at dui suscipit, eu imperdiet magna malesuada. Donec sit amet egestas ex. Maecenas vestibulum congue quam. Mauris est lorem, elementum vitae porta ut, imperdiet quis lacus. Sed euismod, justo elementum pulvinar pellentesque, lectus lorem blandit lacus, ut finibus ex mi non diam. Nulla blandit felis at nibh dignissim, ac pellentesque lectus convallis. Vivamus tortor nibh, facilisis id ornare at, semper id lorem. Aenean eu dignissim nulla. Morbi vel dolor quis magna facilisis scelerisque at vel turpis. Etiam dictum elit ut ultrices gravida. Morbi eget enim vitae nibh molestie faucibus. Donec aliquam quis ex sed tristique.\n	2021-06-24 17:19:12.597+02	2021-06-24 17:19:12.597+02
+34	362	16	Quisque sit amet sem sed nisi facilisis volutpat sit amet sit amet orci. Duis viverra pharetra posuere. Nunc id condimentum elit. Suspendisse elementum nibh nec justo euismod, at vulputate odio malesuada. Etiam nec urna eget mi aliquam lobortis. Duis aliquet, odio eget ullamcorper faucibus, risus dui hendrerit turpis, at vulputate mauris dui sed justo. Praesent tincidunt erat sit amet arcu tristique posuere. Duis ac eleifend elit. Praesent eu scelerisque metus. Nunc sit amet metus interdum, egestas ex eget, faucibus arcu. Mauris et metus dictum, elementum dui at, condimentum tortor.	2021-06-14 14:21:41.681+02	2021-06-14 14:21:41.681+02
+35	80521	16	Proin ut sodales erat. Aliquam erat volutpat. Vestibulum sit amet dictum ante, sed interdum velit. Maecenas gravida aliquet facilisis. Cras commodo lobortis malesuada. In consequat pulvinar vehicula. Cras varius pellentesque dui, vulputate dapibus velit suscipit non. Vestibulum sollicitudin ex sed consequat molestie. Curabitur ac dolor quis est scelerisque porta et vel ex. Morbi posuere nisi at risus pharetra finibus. Aenean ac odio odio. In hac habitasse platea dictumst. Vivamus pharetra mi nunc, in pellentesque felis consequat non. Nunc facilisis turpis commodo mi aliquam egestas. Nulla fringilla sit amet nunc sed ultrices. Cras mollis ullamcorper pharetra.	2021-06-14 18:12:14.197+02	2021-06-14 18:12:14.197+02
+36	85586	71	Etiam eu fringilla eros. Fusce nisl urna, sagittis a metus nec, cursus finibus augue. Duis nec scelerisque quam, sit amet eleifend odio. Maecenas ultricies risus ante, vel tempor ligula cursus a. Duis id neque in nisi malesuada facilisis. Aliquam at felis non mauris viverra maximus eget vitae odio. Interdum et malesuada fames ac ante ipsum primis in faucibus. In eu neque eu dolor lobortis pellentesque eget id tellus. Sed mattis rhoncus tristique. Ut at viverra augue. Proin congue erat ac purus gravida pretium. Integer lacinia leo varius nisi elementum gravida. Pellentesque iaculis, erat quis elementum auctor, mi mauris interdum nunc, non aliquam nisi purus eu nulla.	2021-06-24 11:46:33.995+02	2021-06-24 11:46:33.995+02
+33	85585	16	Maecenas pretium egestas purus ac fringilla. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed sed urna metus. Vestibulum ut tortor in dolor ullamcorper cursus. Aliquam laoreet, tellus eu iaculis lobortis, nulla ex commodo elit, non rutrum mauris massa at libero. Aliquam pellentesque in augue et gravida. Sed maximus eu quam id gravida. Nullam mauris odio, commodo aliquam nisl in, hendrerit rutrum enim. Vestibulum pulvinar, sem sed placerat finibus, justo massa aliquam elit, sit amet mattis ante lectus at lectus. In iaculis, lorem a varius fermentum, tellus erat laoreet sem, a consectetur velit eros sit amet ex. Nulla convallis in ipsum et sodales. Curabitur semper nisl vitae diam viverra dictum quis sit amet turpis. Curabitur quis egestas lorem, non lobortis magna. Quisque scelerisque risus eget auctor maximus. Pellentesque orci magna, tristique in gravida vel, semper in turpis.	2021-06-14 14:19:59.705+02	2021-07-03 18:32:17.676+02
+43	85586	73	Seems pretty interesting, I'm curious how this series will evolve	2021-08-12 12:03:10.971+02	2021-08-12 12:03:10.971+02
+40	85579	16	Vestibulum pharetra elit eu eros tincidunt, eget blandit lorem ultricies. Vestibulum in tristique turpis. Aliquam erat volutpat. Curabitur scelerisque risus purus. Sed eget turpis et augue finibus laoreet. Vivamus pellentesque justo a mauris mattis, ac feugiat mi pretium. Cras ut risus pharetra ligula posuere molestie. Etiam fringilla nunc quis est dapibus, ac finibus justo lacinia. Quisque pellentesque bibendum augue nec pretium. Duis id erat non quam tincidunt volutpat. Nam vel fermentum massa, non egestas neque. Nam maximus augue vel magna finibus, nec mattis massa mattis. Sed metus nulla, auctor id risus vel, pellentesque porta magna. Aliquam commodo cursus fringilla. Duis urna lacus, sodales quis nibh vitae, pellentesque commodo odio.	2021-07-03 18:32:37.346+02	2021-07-03 18:44:18.159+02
+42	89677	16	Writing reviewwwwwsdsfddf updated!	2021-08-12 11:58:17.331+02	2021-08-12 11:58:26.395+02
+41	85586	16	A good protion of reading, nice series dfffddffdfdfd	2021-08-09 09:46:42.15+02	2021-08-13 12:56:01.777+02
+39	85584	16	Nam sit amet odio justo. Praesent blandit velit sit amet risus porttitor gravida. Praesent aliquet felis ac urna porta, sed euismod erat molestie. Fusce dictum eros a lacus gravida, sed ultricies felis sagittis. Sed at ipsum vestibulum, hendrerit est sed, posuere elit. Phasellus laoreet tristique mi, aliquam mollis nibh eleifend id. Suspendisse nec eleifend dui. Nam at mauris ultricies, imperdiet risus id, commodo nunc. Maecenas vulputate ligula urna. Sed feugiat sagittis efficitur. Nunc ultrices elit eleifend laoreet malesuada. Donec eget luctus lacus. Nunc ac metus nunc.Nam sit amet odio justo. Praesent blandit velit sit amet risus porttitor gravida. Praesent aliquet felis ac urna porta, sed euismod erat molestie. Fusce dictum eros a lacus gravida, sed ultricies felis sagittis. Sed at ipsum vestibulum, hendrerit est sed, posuere elit. Phasellus laoreet tristique mi, aliquam mollis nibh eleifend id. Suspendisse nec eleifend dui. Nam at mauris ultricies, imperdiet risus id, commodo nunc. Maecenas vulputate ligula urna. Sed feugiat sagittis efficitur. Nunc ultrices elit eleifend laoreet malesuada. Donec eget luctus lacus. Nunc ac metus nunc.Nam sit amet odio justo. Praesent blandit velit sit amet risus porttitor gravida. Praesent aliquet felis ac urna porta, sed euismod erat molestie. Fusce dictum eros a lacus gravida, sed ultricies felis sagittis. Sed at ipsum vestibulum, hendrerit est sed, posuere elit. Phasellus laoreet tristique mi, aliquam mollis nibh eleifend id. Suspendisse nec eleifend dui. Nam at mauris ultricies, imperdiet risus id, commodo nunc. Maecenas vulputate ligula urna. Sed feugiat sagittis efficitur. Nunc ultrices elit eleifend laoreet malesuada. Donec eget luctus lacus. Nunc ac metus nunc.Nam sit amet odio justo. Praesent blandit velit sit amet risus porttitor gravida. Praesent aliquet felis ac urna porta, sed euismod erat molestie. Fusce dictum eros a lacus gravida, sed ultricies felis sagittis. Sed at ipsum vestibulum, hendrerit est sed, posuere elit. Phasellus laoreet tristique mi, aliquam mollis nibh eleifend id. Suspendisse nec eleifend dui. Nam at mauris ultricies, imperdiet risus id, commodo nunc. Maecenas vulputate ligula urna. Sed feugiat sagittis efficitur. Nunc ultrices elit eleifend laoreet malesuada. Donec eget luctus lacus. Nunc ac metus nunc.Nam sit amet odio justo. Praesent blandit velit sit amet risus porttitor gravida. Praesent aliquet felis ac urna porta, sed euismod erat molestie. Fusce dictum eros a lacus gravida, sed ultricies felis sagittis. Sed at ipsum vestibulum, hendrerit est sed, posuere elit. Phasellus laoreet tristique mi, aliquam mollis nibh eleifend id. Suspendisse nec eleifend dui. Nam at mauris ultricies, imperdiet risus id, commodo nunc. Maecenas vulputate ligula urna. Sed feugiat sagittis efficitur. Nunc ultrices elit eleifend laoreet malesuada. Donec eget luctus lacus. Nunc ac metus nunc.Nam sit amet odio justo. Praesent blandit velit sit amet risus porttitor gravida. Praesent aliquet felis ac urna porta, sed euismod erat molestie. Fusce dictum eros a lacus gravida, sed ultricies felis sagittis. Sed at ipsum vestibulum, hendrerit est sed, posuere elit. Phasellus laoreet tristique mi, aliquam mollis nibh eleifend id. Suspendisse nec eleifend dui. Nam at mauris ultricies, imperdiet risus id, commodo nunc. Maecenas vulputate ligula urna. Sed feugiat sagittis efficitur. Nunc ultrices elit eleifend laoreet malesuada. Donec eget luctus lacus. Nunc ac metus nunc.Nam sit amet odio justo. Praesent blandit velit sit amet risus porttitor gravida. Praesent aliquet felis ac urna porta, sed euismod erat molestie. Fusce dictum eros a lacus gravida, sed ultricies felis sagittis. Sed at ipsum vestibulum, hendrerit est sed, posuere elit. Phasellus laoreet tristique mi, aliquam mollis nibh eleifend id. Suspendisse nec eleifend dui. Nam at mauris ultricies, imperdiet risus id, commodo nunc. Maecenas vulputate ligula urna. Sed feugiat sagittis efficitur. Nunc ultrices elit eleifend laoreet malesuada. Donec eget luctus lacus. Nunc ac metus nunc.Nam sit amet odio justo. Praesent blandit velit sit amet risus porttitor gravida. Praesent aliquet felis ac urna porta, sed euismod erat molestie. Fusce dictum eros a lacus gravida, sed ultricies felis sagittis. Sed at ipsum vestibulum, hendrerit est sed, posuere elit. Phasellus laoreet tristique mi, aliquam mollis nibh eleifend id. Suspendisse nec eleifend dui. Nam at mauris ultricies, imperdiet risus id, commodo nunc. Maecenas vulputate ligula urna. Sed feugiat sagittis efficitur. Nunc ultrices elit eleifend laoreet malesuada. Donec eget luctus lacus. Nunc ac metus nunc.Nam sit amet odio justo. Praesent blandit velit sit amet risus porttitor gravida. Praesent aliquet felis ac urna porta, sed euismod erat molestie. Fusce dictum eros a lacus gravida, sed ultricies felis sagittis. Sed at ipsum vestibulum, hendrerit est sed, posuere elit. Phasellus laoreet tristique mi, aliquam mollis nibh eleifend id. Suspendisse nec eleifend dui. Nam at mauris ultricies, imperdiet risus id, commodo nunc. Maecenas vulputate ligula urna. Sed feugiat sagittis efficitur. Nunc ultrices elit eleifend laoreet malesuada. Donec eget luctus lacus. Nunc ac metus nunc.Nam sit amet odio justo. Praesent blandit velit sit amet risus porttitor gravida. Praesent aliquet felis ac urna porta, sed euismod erat molestie. Fusce dictum eros a lacus gravida, sed ultricies felis sagittis. Sed at ipsum vestibulum, hendrerit est sed, posuere elit. Phasellus laoreet tristique mi, aliquam mollis nibh eleifend id. Suspendisse nec eleifend dui. Nam at mauris ultricies, imperdiet risus id, commodo nunc. Maecenas vulputate ligula urna. Sed feugiat sagittis efficitur. Nunc ultrices elit eleifend laoreet malesuada. Donec eget luctus lacus. Nunc ac metus nunc.Nam sit amet odio justo. Praesent blandit velit sit amet risus porttitor gravida. Praesent aliquet felis ac urna porta, sed euismod erat molestie. Fusce dictum eros a lacus gravida, sed ultricies felis sagittis. Sed at ipsum vestibulum, hendrerit est sed, posuere elit. Phasellus laoreet tristique mi, aliquam mollis nibh eleifend id. Suspendisse nec eleifend dui. Nam at mauris ultricies, imperdiet risus id, commodo nunc. Maecenas vulputate ligula urna. Sed feugiat sagittis efficitur. Nunc ultrices elit eleifend laoreet malesuada. Donec eget luctus lacus. Nunc ac metus nunc.Nam sit amet odio justo. Praesent blandit velit sit amet risus porttitor gravida. Praesent aliquet felis ac urna porta, sed euismod erat molestie. Fusce dictum eros a lacus gravida, sed ultricies felis sagittis. Sed at ipsum vestibulum, hendrerit est sed, posuere elit. Phasellus laoreet tristique mi, aliquam mollis nibh eleifend id. Suspendisse nec eleifend dui. Nam at mauris ultricies, imperdiet risus id, commodo nunc. Maecenas vulputate ligula urna. Sed feugiat sagittis efficitur. Nunc ultrices elit eleifend laoreet malesuada. Donec eget luctus lacus. Nunc ac metus nunc.Nam sit amet odio justo. Praesent blandit velit sit amet risus porttitor gravida. Praesent aliquet felis ac urna porta, sed euismod erat molestie. Fusce dictum eros a lacus gravida, sed ultricies felis sagittis. Sed at ipsum vestibulum, hendrerit est sed, posuere elit. Phasellus laoreet tristique mi, aliquam mollis nibh eleifend id. Suspendisse nec eleifend dui. Nam at mauris ultricies, imperdiet risus id, commodo nunc. Maecenas vulputate ligula urna. Sed feugiat sagittis efficitur. Nunc ultrices elit eleifend laoreet malesuada. Donec eget luctus lacus. Nunc ac metus nunc.Nam sit amet odio justo. Praesent blandit velit sit amet risus porttitor gravida. Praesent aliquet felis ac urna porta, sed euismod erat molestie. Fusce dictum eros a lacus gravida, sed ultricies felis sagittis. Sed at ipsum vestibulum, hendrerit est sed, posuere elit. Phasellus laoreet tristique mi, aliquam mollis nibh eleifend id. Suspendisse nec eleifend dui. Nam at mauris ultricies, imperdiet risus id, commodo nunc. Maecenas vulputate ligula urna. Sed feugiat sagittis efficitur. Nunc ultrices elit eleifend laoreet malesuada. Donec eget luctus lacus. Nunc ac metus nunc.Nam sit amet odio justo. Praesent blandit velit sit amet risus porttitor gravida. Praesent aliquet felis ac urna porta, sed euismod erat molestie. Fusce dictum eros a lacus gravida, sed ultricies felis sagittis. Sed at ipsum vestibulum, hendrerit est sed, posuere elit. Phasellus laoreet tristique mi, aliquam mollis nibh eleifend id. Suspendisse nec eleifend dui. Nam at mauris ultricies, imperdiet risus id, commodo nunc. Maecenas vulputate ligula urna. Sed feugiat sagittis efficitur. Nunc ultrices elit eleifend laoreet malesuada. Donec eget luctus lacus. Nunc ac metus nunc.Nam sit amet odio justo. Praesent blandit velit sit amet risus porttitor gravida. Praesent aliquet felis ac urna porta, sed euismod erat molestie. Fusce dictum eros a lacus gravida, sed ultricies felis sagittis. Sed at ipsum vestibulum, hendrerit est sed, posuere elit. Phasellus laoreet tristique mi, aliquam mollis nibh eleifend id. Suspendisse nec eleifend dui. Nam at mauris ultricies, imperdiet risus id, commodo nunc. Maecenas vulputate ligula urna. Sed feugiat sagittis efficitur. Nunc ultrices elit eleifend laoreet malesuada. Donec eget luctus lacus. Nunc ac metus nunc.Nam sit amet odio justo. Praesent blandit velit sit amet risus porttitor gravida. Praesent aliquet felis ac urna porta, sed euismod erat molestie. Fusce dictum eros a lacus gravida, sed ultricies felis sagittis. Sed at ipsum vestibulum, hendrerit est sed, posuere elit. Phasellus laoreet tristique mi, aliquam mollis nibh eleifend id. Suspendisse nec eleifend dui. Nam at mauris ultricies, imperdiet risus id, commodo nunc. Maecenas vulputate ligula urna. Sed feugiat sagittis efficitur. Nunc ultrices elit eleifend laoreet malesuada. Donec eget luctus lacus. Nunc ac metus nunc.Nam sit amet odio justo. Praesent blandit velit sit amet risus porttitor gravida. Praesent aliquet felis ac urna porta, sed euismod erat molestie. Fusce dictum eros a lacus gravida, sed ultricies felis sagittis. Sed at ipsum vestibulum, hendrerit est sed, posuere elit. Phasellus laoreet tristique mi, aliquam mollis nibh eleifend id. Suspendisse nec eleifend dui. Nam at mauris ultricies, imperdiet risus id, commodo nunc. Maecenas vulputate ligula urna. Sed feugiat sagittis efficitur. Nunc ultrices elit eleifend laoreet malesuada. Donec eget luctus lacus. Nunc ac metus nunc.Nam sit amet odio justo. Praesent blandit velit sit amet risus porttitor gravida. Praesent aliquet felis ac urna porta, sed euismod erat molestie. Fusce dictum eros a lacus gravida, sed ultricies felis sagittis. Sed at ipsum vestibulum, hendrerit est sed, posuere elit. Phasellus laoreet tristique mi, aliquam mollis nibh eleifend id. Suspendisse nec eleifend dui. Nam at mauris ultricies, imperdiet risus id, commodo nunc. Maecenas vulputate ligula urna. Sed feugiat sagittis efficitur. Nunc ultrices elit eleifend laoreet malesuada. Donec eget luctus lacus. Nunc ac metus nunc.	2021-06-24 17:20:43.059+02	2021-08-17 17:27:15.079+02
+44	89677	75	 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque a enim nec lectus maximus semper sed non magna. Praesent lacinia diam metus, et tempus arcu imperdiet at. Fusce id finibus diam, sit amet ullamcorper lectus. Vestibulum vel porta mi. Ut ligula nisi, pharetra nec justo eu, rhoncus malesuada elit. Curabitur tincidunt, metus quis convallis dignissim, quam enim rutrum erat, et vestibulum ipsum tortor id tellus. In eleifend lorem vel ipsum suscipit rutrum. In gravida, dolor eget vulputate porttitor, orci purus rhoncus elit, eget pretium leo arcu non est. Nulla ultrices nibh ac dui euismod venenatis. Quisque placerat iaculis nisl. Cras venenatis risus neque, quis consequat mauris eleifend at. Quisque malesuada erat ultricies, vestibulum leo at, suscipit est. Aenean eu leo commodo elit egestas imperdiet.\n\nNulla facilisi. Fusce lobortis mi ut lectus placerat accumsan. Vestibulum at laoreet massa, ut vehicula metus. Cras gravida mauris iaculis, cursus odio vel, vulputate neqddddddddddddddddddddddddddddddd Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque a enim nec lectus maximus semper sed non magna. Praesent lacinia diam metus, et tempus arcu imperdiet at. Fusce id finibus diam, sit amet ullamcorper lectus. Vestibulum vel porta mi. Ut ligula nisi, pharetra nec justo eu, rhoncus malesuada elit. Curabitur tincidunt, metus quis convallis dignissim, quam enim rutrum erat, et vestibulum ipsum tortor id tellus. In eleifend lorem vel ipsum suscipit rutrum. In gravida, dolor eget vulputate porttitor, orci purus rhoncus elit, eget pretium leo arcu non est. Nulla ultrices nibh ac dui euismod venenatis. Quisque placerat iaculis nisl. Cras venenatis risus neque, quis consequat mauris eleifend at. Quisque malesuada erat ultricies, vestibulum leo at, suscipit est. Aenean eu leo commodo elit egestas imperdiet.\n\nNulla facilisi. Fusce lobortis mi ut lectus placerat accumsan. Vestibulum at laoreet massa, ut vehicula metus. Cras gravida mauris iaculis, cursus odio vel, vulputate neq Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque a enim nec lectus maximus semper sed non magna. Praesent lacinia diam metus, et tempus arcu imperdiet at. Fusce id finibus diam, sit amet ullamcorper lectus. Vestibulum vel porta mi. Ut ligula nisi, pharetra nec justo eu, rhoncus malesuada elit. Curabitur tincidunt, metus quis convallis dignissim, quam enim rutrum erat, et vestibulum ipsum tortor id tellus. In eleifend lorem vel ipsum suscipit rutrum. In gravida, dolor eget vulputate porttitor, orci purus rhoncus elit, eget pretium leo arcu non est. Nulla ultrices nibh ac dui euismod venenatis. Quisque placerat iaculis nisl. Cras venenatis risus neque, quis consequat mauris eleifend at. Quisque malesuada erat ultricies, vestibulum leo at, suscipit est. Aenean eu leo commodo elit egestas imperdiet.\n\nNulla facilisi. Fusce lobortis mi ut lectus placerat accumsan. Vestibulum at laoreet massa, ut vehicula metus. Cras gravida mauris iaculis, cursus odio vel, vulputate neq Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque a enim nec lectus maximus semper sed non magna. Praesent lacinia diam metus, et tempus arcu imperdiet at. Fusce id finibus diam, sit amet ullamcorper lectus. Vestibulum vel porta mi. Ut ligula nisi, pharetra nec justo eu, rhoncus malesuada elit. Curabitur tincidunt, metus quis convallis dignissim, quam enim rutrum erat, et vestibulum ipsum tortor id tellus. In eleifend lorem vel ipsum suscipit rutrum. In gravida, dolor eget vulputate porttitor, orci purus rhoncus elit, eget pretium leo arcu non est. Nulla ultrices nibh ac dui euismod venenatis. Quisque placerat iaculis nisl. Cras venenatis risus neque, quis consequat mauris eleifend at. Quisque malesuada erat ultricies, vestibulum leo at, suscipit est. Aenean eu leo commodo elit egestas imperdiet.\n\nNulla facilisi. Fusce lobortis mi ut lectus placerat accumsan. Vestibulum at laoreet massa, ut vehicula metus. Cras gravida mauris iaculis, cursus odio vel, vulputate neq Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque a enim nec lectus maximus semper sed non magna. Praesent lacinia diam metus, et tempus arcu imperdiet at. Fusce id finibus diam, sit amet ullamcorper lectus. Vestibulum vel porta mi. Ut ligula nisi, pharetra nec justo eu, rhoncus malesuada elit. Curabitur tincidunt, metus quis convallis dignissim, quam enim rutrum erat, et vestibulum ipsum tortor id tellus. In eleifend lorem vel ipsum suscipit rutrum. In gravida, dolor eget vulputate porttitor, orci purus rhoncus elit, eget pretium leo arcu non est. Nulla ultrices nibh ac dui euismod venenatis. Quisque placerat iaculis nisl. Cras venenatis risus neque, quis consequat mauris eleifend at. Quisque malesuada erat ultricies, vestibulum leo at, suscipit est. Aenean eu leo commodo elit egestas imperdiet.\n\nNulla facilisi. Fusce lobortis mi ut lectus placerat accumsan. Vestibulum at laoreet massa, ut vehicula metus. Cras gravida mauris iaculis,	2021-08-12 12:57:01.798+02	2021-08-12 12:57:19.809+02
+46	78686	75	testing	2021-08-12 16:33:41.835+02	2021-08-12 16:33:41.835+02
+47	90136	16	Seems pretty interesting, I'll continue with this series	2021-08-13 12:42:46.862+02	2021-08-13 12:42:46.862+02
+48	89563	16	Best for learning new things about captain marvel	2021-08-13 12:45:12.573+02	2021-08-13 12:45:12.573+02
+49	84366	16	Action filled...\n	2021-08-13 12:48:11.069+02	2021-08-13 12:48:11.069+02
+50	27581	16	sssssssss	2021-08-13 12:50:31.732+02	2021-08-13 12:50:31.732+02
+51	92237	16	Comic full of space adventures!	2021-08-13 17:16:02.475+02	2021-08-13 17:16:02.475+02
+52	85581	16	I had tried to read J.R.R. Tolkien' The Silamarillion multiple times in the past (and always unsuccessfully) and had basically given up, but I finally did manage to realise that I was attempting to read it the wrong way; I was trying to read The Silmarillion like I have read and with pleasure reread LOTR, as a story, an epic story, of course, but still first and foremost as a story. Now while The Silmarillion is of course also partially a story, it is (at least for me) first and foremost a religious type document, a biblical, mythological account of the Elder Days of Middle Earth. So this time, I read The Silmarillion the way I used to read my Bible and how I have also approached Hesiod's Theogony and other tomes on Greek, Roman and Norse mythology (perusing small bits and pieces as needed and desired and following along via audiobook at the same time if possible). And I do know this might indeed and in fact sound a bit strange, I actually tried singing some of the parts to myself. And yes, I will likely have to reread The Simarillion sometime soon, because there is just no way I am going to be able to keep all of the different names etc. clear in my head (and I kind of also wish I had taken notes). But for a first full and complete read, I can only say, wow. As good as LOTR, but also very very different, and I honestly and strongly do believe that in order to truly appreciate, savour and enjoy what J.R.R. Tolkien has created with and in The Silmarillion a totally different and novel approach and method of reading are necessary and required (for The Silmarillion just does not work as a typical novel, since it is not in any manner a typical novel, and heck, it is not even a typical epic for that matter either) aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa	2021-08-18 09:30:17.873+02	2021-08-18 09:42:36.226+02
+53	89678	16	I had no idea that this series will evolve this way!	2021-09-13 09:51:12.764+02	2021-09-13 09:51:12.764+02
+\.
+
+
+--
+-- TOC entry 3031 (class 0 OID 16576)
+-- Dependencies: 202
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.users (id, nickname, email, password, created_at, updated_at, birth_date) FROM stdin;
+54	MelkorX77	melkorx77@lotr.com	$2b$12$4khpXJbXgbSik8k3ke3Q3.AbNTUMcrllL0SyicxQCitJ1JExx9lum	2021-04-17 13:51:29.798+02	2021-04-17 13:51:29.798+02	1136-08-11 23:58:00+01:22
+55	MelkorX777	melkorx777@lotr.com	$2b$12$bQilmc942VnPDuX162ob/uenFahkYTgQhwHzFkAV9PeR9OdDcdzQy	2021-04-17 13:51:49.994+02	2021-04-17 13:51:49.994+02	2007-07-05 00:00:00+02
+56	MelkorX7777	melkorx7777@lotr.com	$2b$12$EdF9ovfU6twCcP8pLvO3j.3u3e2cDFywOR.2bBR2x.MhsDI6/0gfe	2021-04-17 13:52:01.107+02	2021-04-17 13:52:01.107+02	2007-10-05 00:00:00+02
+57	MelkorX77677	melkorx76777@lotr.com	$2b$12$OTn6Rs8DLpSd1o0JKaM0Ve/WJppCRGkuoW3G5cLsawFW16sXPyXKC	2021-04-17 13:52:12.85+02	2021-04-17 13:52:12.85+02	2007-11-05 00:00:00+01
+58	MelkorX775677	melkorx767577@lotr.com	$2b$12$CwRLAt8TTMmWz5F17mm4uebZFJb8jBOlAMCs1vHxi8n8GyYRYaHqu	2021-04-17 13:52:26.509+02	2021-04-17 13:52:26.509+02	2007-12-05 00:00:00+01
+59	sauronx7773	wweewe23@dsd.com	$2b$12$VZUypqoFdvVVYNjhfPIGaeEth9g72vQO8CmKIBk2EtL5dIN5pcYeq	2021-04-17 14:08:35.44+02	2021-04-17 14:08:35.44+02	2007-05-17 00:00:00+02
+60	sauronx7656	eewewwe@3ewew.com	$2b$12$Ge/TcYgDijbFWsMNDitDsOrqfKCWFjwiuj417bwehb.IeDVxnvwda	2021-04-17 14:42:04.388+02	2021-04-17 14:42:04.388+02	2009-10-16 00:00:00+02
+61	sauronx7333	1231233@123132.com	$2b$12$uO1WN3XWljS/BQo5tpUpEOQLe5rjbU5qs8I1nGekbpY0uV3OMvdP2	2021-04-17 14:52:11.574+02	2021-04-17 14:52:11.574+02	2007-07-12 00:00:00+02
+72	TurgonOfGondolin	turgon@lotr.com	$2b$12$MR6oOkW98khtu2ENiGveo.pG/Ju6vMzZV6yeO3ujyPk34OamsJT8m	2021-07-06 18:07:53.969+02	2021-07-06 18:07:53.969+02	1970-07-10 00:00:00+01
+73	Narsil77	narsil77@gmail.com	$2b$12$.6qBT2KbQVcMEFcYKbG7Zem0iA9pCKckW.EcpKOVS3rFPMmxjaNgy	2021-08-12 12:00:47.049+02	2021-08-12 12:00:47.049+02	2010-03-09 00:00:00+01
+74	Eternal99	eternal99@gmail.com	$2b$12$uEAcx82WNKJRptHmUzC.R.l7Kr3V5UjrQLNNYg.Kx16Q9mUWu1hN.	2021-08-12 12:41:44.059+02	2021-08-12 12:41:44.059+02	2011-02-11 00:00:00+01
+75	saddasdaaaaaaaaaaaaa	asdasd@ss.com	$2b$12$tCIoJaD1iaxQZAvN4MS/Q.5CunqgD0ZCU.aF5TXonq9HuaBJmkXZ.	2021-08-12 12:43:55.447+02	2021-08-12 12:49:50.338+02	1985-05-12 00:00:00+02
+62	Mormegil	mormegil@lotr.com	$2b$12$Uk3vPhASRHyT8gBtQ/GOouipBECyIuubuAav.vvSail6L4b7TDjAa	2021-04-27 13:13:13.75+02	2021-04-27 13:13:13.75+02	1994-04-11 00:00:00+02
+63	Morwen	morwen@lotr.com	$2b$12$eg9v54k/li.l18CwqWGFgOWJUhRjnGk6T.WcatYKfgFVIZhiWTm2q	2021-04-27 13:17:51.048+02	2021-04-27 13:17:51.048+02	1961-05-05 00:00:00+01
+64	Niniel	niniel@lotr.com	$2b$12$sqSUve2LudPuYG6oxYCJ4Opb8TGSgMcICYcXCU.Br68vi96ughB9W	2021-04-27 13:19:58.43+02	2021-04-27 13:19:58.43+02	1990-03-14 00:00:00+01
+76	rrrrrrrrrrrrrrr	aarrrr@gmail.com	$2b$12$QmKDu8YDr.jH93fUcmZ6wOfPVIlC3Wxq31bWITjo1BJDfWDIy4xHe	2021-08-13 17:31:26.872+02	2021-08-13 17:31:26.872+02	2016-05-03 00:00:00+02
+77	aaa	aaa@aaa.com	$2b$12$JgXwts8JBCYew32/TYjmz.YI2eDVaZpj0WarnYQj4AUfE2/qclJoa	2021-08-13 17:33:09.202+02	2021-08-13 17:33:09.202+02	2014-04-04 00:00:00+02
+65	MorgothBauglir	morgoth@angband.com	$2b$12$qBHbfEHI0u9olc5yYwkqQOzksF6wRP5q5TdMS0TCKeCMIQgmyaBAW	2021-05-27 19:24:12.37+02	2021-05-27 19:24:12.37+02	1901-05-09 23:36:00+01
+66	Lalaith66	lalaith@lotr.com	$2b$12$EdIH8woRmOSKcl29VdbF3.NC.SAHFlMwIb3k7CYEP09TemQebFW3S	2021-06-01 18:22:01.452+02	2021-06-01 18:22:01.452+02	1995-05-03 00:00:00+02
+67	Lalaith55	lalaith55@lotr.com	$2b$12$oUjBQJJAelrp3Lupg8AaPeKfk31NitTYNeC0BmxjtiGwjsSEAeWS.	2021-06-01 18:24:09.013+02	2021-06-01 18:24:09.013+02	1997-07-05 00:00:00+02
+68	Turin33	turin@lotr.com	$2b$12$xvqVMMpF1NBkYoDP6f14uuvjegvQHNdj18vws79NMM0OmE9BS0cqi	2021-06-01 18:37:14.197+02	2021-06-01 18:37:14.197+02	2007-03-16 00:00:00+01
+69	Mormegil99	mormegil99@lotr.com	$2b$12$jdeyFgPloaPykoiDCxxXv.fZsI05XAEUKAF.22U/ng7s6uPPMj2S.	2021-06-03 17:31:50.677+02	2021-06-03 17:31:50.677+02	1987-08-07 00:00:00+02
+78	aer	qeqeqe@qeqe.com	$2b$12$4W7czTRktCpFWm4cbDmSJOZg63IzlJRATBogWSw84I3TJRVcol4ju	2021-08-13 17:37:11.865+02	2021-08-13 17:37:11.865+02	2016-06-03 00:00:00+02
+79	oszluzg	oszluzg@gmail.com	$2b$12$7Cj3ydp6JCvcrFP8p.au4e7DQnkM2qlPK3AKtylAVr7Bz8MpuUFhC	2021-08-16 11:28:40.377+02	2021-08-16 11:28:40.377+02	2010-09-06 00:00:00+02
+80	ssssassa11221	asaassasa@dded.com	$2b$12$SkaKtSAC.OFkVa6kk5cn3Ofjh3I0dn3EkIqMJUH.WN0EpgOhEc7m6	2021-08-16 17:49:34.371+02	2021-08-16 17:49:34.371+02	2012-09-11 00:00:00+02
+16	sauronx77	sauronx7@gmail.com	$2b$12$rd4Ldt4k5V4f2htPEN84Vus/paZyEQzXnudxDh1pI5XC5cXX0A.xi	2021-03-23 11:04:10.197+01	2021-08-17 09:19:07.714+02	1997-09-14 00:00:00+02
+81	jester23	jester23@gmail.com	123123	2021-08-17 09:33:58.801+02	2021-08-17 09:33:58.801+02	2009-09-11 00:00:00+02
+82	trickster24	trickster24@gmail.com	$2b$12$2kSwewdft/M/d54BiJV1F.AO.NOURHIklVhqSc/AWCuW9llVdFoLe	2021-08-17 09:47:46.415+02	2021-08-17 09:47:46.415+02	1993-10-09 00:00:00+01
+71	TevildeX	tevildex@gmail.com	$2b$12$aJX3TkLJKIQl8Ms0CN4ege1lq4dP5x0EKC2gExlGcrQnt0gb3OMx6	2021-06-24 11:40:20.483+02	2021-06-24 11:40:20.483+02	1990-05-06 00:00:00+02
+70	NercromancerThu	thu@lotr.com	$2b$12$BcXAFiQL0hrwU.9UTarOVul3KCGhO.8/51GuFui2X5itKVV52brjC	2021-06-09 14:45:39.312+02	2021-06-24 17:19:31.577+02	1972-06-07 00:00:00+01
+52	morgoth	morgoth@utumno.com	$2b$12$2j3Pk1qt1UJ4vJelPSZCT./i2EiP1Os9jV2zPVKwOFZR57GxgnBuC	2021-04-08 19:46:47.57+02	2021-04-08 19:46:47.57+02	1900-12-31 23:36:00+01
+53	MelkorX7	melkorx7@lotr.com	$2b$12$3sW7O1S5Sd74ARPrzSiIa.Eq3.O/72RJ3KBGMirq2onaPsIg7a8ma	2021-04-17 13:48:46.508+02	2021-04-17 13:48:46.508+02	1136-08-11 23:58:00+01:22
+\.
+
+
+--
+-- TOC entry 3037 (class 0 OID 17051)
+-- Dependencies: 208
+-- Data for Name: users_comics; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.users_comics (id, category, created_at, updated_at, comic_id, user_id) FROM stdin;
+415	Favourites	2021-06-14 14:14:47.906+02	2021-06-14 14:14:47.906+02	85582	16
+418	Ainulindale	2021-06-14 14:15:19.503+02	2021-06-14 14:15:19.503+02	85581	16
+420	Favourites	2021-06-14 14:15:30.301+02	2021-06-14 14:15:30.301+02	85579	16
+421	Before Cinematic	2021-06-14 14:17:02.533+02	2021-06-14 14:17:02.533+02	93022	16
+422	Before Cinematic	2021-06-14 14:17:07.248+02	2021-06-14 14:17:07.248+02	84365	16
+423	Before Cinematic	2021-06-14 14:17:10.435+02	2021-06-14 14:17:10.435+02	84369	16
+424	Old Good	2021-06-14 14:18:05.687+02	2021-06-14 14:18:05.687+02	18210	16
+425	Old Good	2021-06-14 14:18:26.198+02	2021-06-14 14:18:26.198+02	66114	16
+426	Old Good	2021-06-14 14:18:38.387+02	2021-06-14 14:18:38.387+02	10795	16
+427	Old Good	2021-06-14 14:18:45.83+02	2021-06-14 14:18:45.83+02	10800	16
+428	Old Good	2021-06-14 14:18:49.576+02	2021-06-14 14:18:49.576+02	10778	16
+429	Nice Drawings	2021-06-14 14:18:50.214+02	2021-06-14 14:18:50.214+02	10778	16
+430	Favourites	2021-06-14 14:19:11.313+02	2021-06-14 14:19:11.313+02	10778	16
+431	Old Good	2021-06-14 14:19:16.615+02	2021-06-14 14:19:16.615+02	10855	16
+432	Old Good	2021-06-14 14:19:20.655+02	2021-06-14 14:19:20.655+02	10844	16
+433	Old Good	2021-06-14 14:19:26.908+02	2021-06-14 14:19:26.908+02	10833	16
+434	Ainulindale	2021-06-14 14:19:38.118+02	2021-06-14 14:19:38.118+02	85579	16
+435	Ainulindale	2021-06-14 14:19:42.738+02	2021-06-14 14:19:42.738+02	85578	16
+437	Old Good	2021-06-14 14:21:29.786+02	2021-06-14 14:21:29.786+02	362	16
+438	Favourites	2021-06-14 18:08:06.322+02	2021-06-14 18:08:06.322+02	362	16
+439	Movies Based	2021-06-14 18:10:55.694+02	2021-06-14 18:10:55.694+02	80521	16
+440	Movies Based	2021-06-14 18:11:08.81+02	2021-06-14 18:11:08.81+02	80507	16
+441	Movies Based	2021-06-14 18:11:14.011+02	2021-06-14 18:11:14.011+02	80511	16
+442	Movies Based	2021-06-14 18:11:28.787+02	2021-06-14 18:11:28.787+02	80509	16
+446	Nice Drawings	2021-06-23 19:30:01.145+02	2021-06-23 19:30:01.145+02	85577	16
+447	Antiheroes	2021-06-23 19:30:14.561+02	2021-06-23 19:30:14.561+02	85577	16
+448	Favourites	2021-06-24 11:45:58.25+02	2021-06-24 11:45:58.25+02	85586	71
+450	Artworks	2021-06-24 11:46:22.369+02	2021-06-24 11:46:22.369+02	85586	71
+451	Fav Series	2021-06-24 11:47:07.69+02	2021-06-24 11:47:07.69+02	85586	71
+453	Favourites	2021-06-24 11:47:31.733+02	2021-06-24 11:47:31.733+02	85585	71
+454	Artworks	2021-06-24 11:47:36.564+02	2021-06-24 11:47:36.564+02	85579	71
+455	Fav Series	2021-06-24 11:47:36.87+02	2021-06-24 11:47:36.87+02	85579	71
+456	Artworks	2021-06-24 11:47:44.634+02	2021-06-24 11:47:44.634+02	84361	71
+457	Artworks	2021-06-24 11:47:48.961+02	2021-06-24 11:47:48.961+02	67762	71
+458	Fav Series	2021-06-24 11:47:52.761+02	2021-06-24 11:47:52.761+02	67767	71
+459	Artworks	2021-06-24 11:47:54.145+02	2021-06-24 11:47:54.145+02	67767	71
+460	Favourites	2021-06-24 11:47:54.991+02	2021-06-24 11:47:54.991+02	67767	71
+461	Antiheroes	2021-06-24 11:50:33.457+02	2021-06-24 11:50:33.457+02	81178	16
+462	Before Cinematic	2021-06-24 11:50:34.879+02	2021-06-24 11:50:34.879+02	81178	16
+463	Nice Drawings	2021-06-24 17:10:30.442+02	2021-06-24 17:10:30.442+02	85582	16
+464	Old Good	2021-06-24 17:10:30.757+02	2021-06-24 17:10:30.757+02	85582	16
+465	Favourites	2021-06-24 17:21:27.755+02	2021-06-24 17:21:27.755+02	85579	70
+466	Favourites	2021-06-24 17:21:43.617+02	2021-06-24 17:21:43.617+02	93018	70
+467	Crossovers	2021-06-24 17:21:50.544+02	2021-06-24 17:21:50.544+02	93018	70
+468	Crossovers	2021-06-24 17:22:01.116+02	2021-06-24 17:22:01.116+02	84369	70
+469	Favourites	2021-06-24 17:22:01.431+02	2021-06-24 17:22:01.431+02	84369	70
+471	Favourites	2021-06-25 10:26:17.23+02	2021-06-25 10:26:17.23+02	92236	16
+472	Nice Drawings	2021-06-25 10:26:18.034+02	2021-06-25 10:26:18.034+02	92236	16
+473	Space Adventures	2021-06-29 14:22:28.115+02	2021-06-29 14:22:28.115+02	92236	16
+483	Favourites	2021-07-02 13:07:19.251+02	2021-07-02 13:07:19.251+02	85585	16
+484	Before Cinematic	2021-07-02 19:34:36.464+02	2021-07-02 19:34:36.464+02	85585	16
+487	Ainulindale	2021-07-03 18:32:02.927+02	2021-07-03 18:32:02.927+02	85585	16
+488	Ainulindale	2021-07-07 09:19:33.609+02	2021-07-07 09:19:33.609+02	10822	16
+491	Favourites	2021-08-09 09:39:38.276+02	2021-08-09 09:39:38.276+02	85586	16
+492	Movies Based	2021-08-09 09:46:20.243+02	2021-08-09 09:46:20.243+02	85586	16
+493	Nice Drawings	2021-08-09 18:50:08.825+02	2021-08-09 18:50:08.825+02	85586	16
+494	Favourites	2021-08-11 09:35:54.263+02	2021-08-11 09:35:54.263+02	18226	16
+495	Before Cinematic	2021-08-11 09:35:54.693+02	2021-08-11 09:35:54.693+02	18226	16
+496	Antiheroes	2021-08-11 09:35:55.056+02	2021-08-11 09:35:55.056+02	18226	16
+497	Before Cinematic	2021-08-12 11:58:00.192+02	2021-08-12 11:58:00.192+02	89677	16
+498	Ainulindale	2021-08-12 11:58:00.478+02	2021-08-12 11:58:00.478+02	89677	16
+499	Nice Drawings	2021-08-12 11:58:01.212+02	2021-08-12 11:58:01.212+02	89677	16
+500	estesttst	2021-08-12 11:58:06.081+02	2021-08-12 11:58:06.081+02	89677	16
+501	Favourites	2021-08-12 12:02:18.056+02	2021-08-12 12:02:18.056+02	85586	73
+502	To read soon	2021-08-12 12:02:28.386+02	2021-08-12 12:02:28.386+02	85586	73
+503	Favourites	2021-08-12 12:03:41.603+02	2021-08-12 12:03:41.603+02	67767	73
+504	To read soon	2021-08-12 12:03:41.979+02	2021-08-12 12:03:41.979+02	67767	73
+505	Summer	2021-08-12 12:03:57.049+02	2021-08-12 12:03:57.049+02	67767	73
+507	Space Novels	2021-08-12 12:07:54.793+02	2021-08-12 12:07:54.793+02	21564	73
+508	Space Novels	2021-08-12 12:08:01.23+02	2021-08-12 12:08:01.23+02	21759	73
+509	Space Novels	2021-08-12 12:08:06.808+02	2021-08-12 12:08:06.808+02	23127	73
+510	To read soon	2021-08-12 12:08:07.403+02	2021-08-12 12:08:07.403+02	23127	73
+512	Summer	2021-08-12 12:08:52.871+02	2021-08-12 12:08:52.871+02	89677	73
+513	aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa	2021-08-12 12:11:34.43+02	2021-08-12 12:11:34.43+02	89677	73
+518	Favourites	2021-08-12 12:50:04.376+02	2021-08-12 12:50:04.376+02	89677	75
+519	Favourites	2021-08-12 16:16:04.469+02	2021-08-12 16:16:04.469+02	85579	75
+520	Favourites	2021-08-12 16:16:20.084+02	2021-08-12 16:16:20.084+02	93020	75
+521	Fantasy	2021-08-12 16:16:37.743+02	2021-08-12 16:16:37.743+02	92238	75
+523	Fantasy	2021-08-12 16:33:00.011+02	2021-08-12 16:33:00.011+02	78685	75
+527	Movies Based	2021-08-13 11:38:46.216+02	2021-08-13 11:38:46.216+02	93019	16
+528	Movies Based	2021-08-13 11:41:49.143+02	2021-08-13 11:41:49.143+02	78690	16
+529	Space Adventures	2021-08-13 11:48:14.196+02	2021-08-13 11:48:14.196+02	78694	16
+530	Old Good	2021-08-13 11:48:15.521+02	2021-08-13 11:48:15.521+02	78694	16
+531	Old Good	2021-08-13 12:55:53.547+02	2021-08-13 12:55:53.547+02	85586	16
+532	Space Adventures	2021-08-13 12:55:53.856+02	2021-08-13 12:55:53.856+02	85586	16
+534	estesttst	2021-08-13 12:55:54.743+02	2021-08-13 12:55:54.743+02	85586	16
+535	fffff	2021-08-13 12:55:57.061+02	2021-08-13 12:55:57.061+02	85586	16
+536	Nice Drawings	2021-08-13 12:56:35.753+02	2021-08-13 12:56:35.753+02	78686	16
+537	Movies Based	2021-08-13 12:56:36.019+02	2021-08-13 12:56:36.019+02	78686	16
+539	Before Cinematic	2021-08-13 12:56:36.871+02	2021-08-13 12:56:36.871+02	78686	16
+540	Antiheroes	2021-08-13 12:56:37.323+02	2021-08-13 12:56:37.323+02	78686	16
+541	Ainulindale	2021-08-13 12:56:37.647+02	2021-08-13 12:56:37.647+02	78686	16
+544	testing22	2021-08-17 15:35:04.273+02	2021-08-17 15:35:04.273+02	89677	16
+545	ffdfdfdf	2021-08-17 15:57:05.991+02	2021-08-17 15:57:05.991+02	89677	16
+546	a	2021-08-17 15:57:14.259+02	2021-08-17 15:57:14.259+02	89677	16
+547	sasasasas	2021-08-17 16:00:01.308+02	2021-08-17 16:00:01.308+02	89677	16
+548	Antiheroes	2021-08-17 16:07:04.291+02	2021-08-17 16:07:04.291+02	89677	16
+549	aaa	2021-08-17 17:02:09.652+02	2021-08-17 17:02:09.652+02	89677	16
+550	Movies Based	2021-09-13 09:48:10.082+02	2021-09-13 09:48:10.082+02	89678	16
+551	Favourites	2021-09-13 09:48:10.593+02	2021-09-13 09:48:10.593+02	89678	16
+552	Before Cinematic	2021-09-13 09:48:11.023+02	2021-09-13 09:48:11.023+02	89678	16
+553	Neon Lights	2021-09-13 09:48:18.847+02	2021-09-13 09:48:18.847+02	89678	16
+554	Old Good	2021-09-13 17:22:05.577+02	2021-09-13 17:22:05.577+02	89678	16
+\.
+
+
+--
+-- TOC entry 3035 (class 0 OID 16987)
+-- Dependencies: 206
+-- Data for Name: users_details; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.users_details (id, about, interests, user_id, created_at, updated_at, profile_image, background_image, profile_image_public_id, background_image_public_id) FROM stdin;
+4			44	2021-04-06 18:30:52.107+02	2021-04-06 18:30:52.107+02	\N	\N	\N	\N
+5			45	2021-04-06 18:37:40.249+02	2021-04-06 18:37:40.249+02	\N	\N	\N	\N
+6			46	2021-04-06 18:38:18.886+02	2021-04-06 18:38:18.886+02	\N	\N	\N	\N
+7			47	2021-04-06 18:39:42.516+02	2021-04-06 18:39:42.516+02	\N	\N	\N	\N
+8			48	2021-04-06 18:42:41.171+02	2021-04-06 18:42:41.171+02	\N	\N	\N	\N
+9			49	2021-04-06 18:43:42.05+02	2021-04-06 18:43:42.05+02	\N	\N	\N	\N
+10			50	2021-04-06 18:45:38.68+02	2021-04-06 18:45:38.68+02	\N	\N	\N	\N
+11			51	2021-04-06 18:46:18.222+02	2021-04-06 18:46:18.222+02	\N	\N	\N	\N
+12			52	2021-04-08 19:46:47.58+02	2021-04-08 19:46:47.58+02	\N	\N	\N	\N
+13			53	2021-04-17 13:48:46.523+02	2021-04-17 13:48:46.523+02	\N	\N	\N	\N
+14			54	2021-04-17 13:51:29.803+02	2021-04-17 13:51:29.803+02	\N	\N	\N	\N
+15			55	2021-04-17 13:51:49.998+02	2021-04-17 13:51:49.998+02	\N	\N	\N	\N
+16			56	2021-04-17 13:52:01.111+02	2021-04-17 13:52:01.111+02	\N	\N	\N	\N
+17			57	2021-04-17 13:52:12.855+02	2021-04-17 13:52:12.855+02	\N	\N	\N	\N
+18			58	2021-04-17 13:52:26.514+02	2021-04-17 13:52:26.514+02	\N	\N	\N	\N
+19			59	2021-04-17 14:08:35.452+02	2021-04-17 14:08:35.452+02	\N	\N	\N	\N
+20			60	2021-04-17 14:42:04.393+02	2021-04-17 14:42:04.393+02	\N	\N	\N	\N
+21			61	2021-04-17 14:52:11.579+02	2021-04-17 14:52:11.579+02	\N	\N	\N	\N
+2	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi luctus sit amet felis eu consectetur. Lorem ipsum dolor sit amet, consectetur adipisci.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi luctus sit amet felis eu consectetur.	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi luctus sit amet felis eu consectetur. Lorem ipsum dolor sit amet, consectetur.	16	2021-03-23 11:04:10.197+01	2021-09-13 09:53:06.989+02	http://res.cloudinary.com/dqu0r0rl2/image/upload/v1621511828/users_images/r6eqijbs8gazbk4ydmux.jpg	http://res.cloudinary.com/dqu0r0rl2/image/upload/v1623591272/users_images/xja2wpj0e7er3c7wmj38.jpg	users_images/r6eqijbs8gazbk4ydmux	users_images/xja2wpj0e7er3c7wmj38
+22			62	2021-04-27 13:13:13.767+02	2021-04-27 13:13:13.767+02				
+23			63	2021-04-27 13:17:51.053+02	2021-04-27 13:17:51.053+02				
+24			64	2021-04-27 13:19:58.435+02	2021-04-27 13:19:58.435+02				
+25	Originally the most powerful of the Ainur created by Eru Ilúvatar, Melkor rebelled against his creator out of pride and sought to corrupt Arda.	Ruling the Arda, waging wars	65	2021-05-27 19:24:12.38+02	2021-05-28 18:14:19.719+02	http://res.cloudinary.com/dqu0r0rl2/image/upload/v1622136326/users_images/nks1vnug8suerbj8do0r.jpg	http://res.cloudinary.com/dqu0r0rl2/image/upload/v1622136326/users_images/utmxktdweh3zixs0qqbw.jpg	users_images/nks1vnug8suerbj8do0r	users_images/utmxktdweh3zixs0qqbw
+26			66	2021-06-01 18:22:01.474+02	2021-06-01 18:22:01.474+02				
+27			67	2021-06-01 18:24:09.017+02	2021-06-01 18:24:09.017+02				
+29			69	2021-06-03 17:31:50.686+02	2021-06-03 17:31:50.686+02				
+28			68	2021-06-01 18:37:14.204+02	2021-06-04 15:20:36.424+02	http://res.cloudinary.com/dqu0r0rl2/image/upload/v1622812835/users_images/wjw0x0k0m8bw6izi9rsh.jpg	http://res.cloudinary.com/dqu0r0rl2/image/upload/v1622812835/users_images/dn6emuu8er14zcoeeh7d.jpg	users_images/wjw0x0k0m8bw6izi9rsh	users_images/dn6emuu8er14zcoeeh7d
+41			81	2021-08-17 09:33:58.838+02	2021-08-17 09:33:58.838+02				
+33	Fantasy and comics fan.	Reading fantasy books and comic also programming	73	2021-08-12 12:00:47.06+02	2021-08-12 12:01:52.466+02	http://res.cloudinary.com/dqu0r0rl2/image/upload/v1628762477/users_images/c1vhdkhy9wrrizfe0pjd.jpg	http://res.cloudinary.com/dqu0r0rl2/image/upload/v1628762477/users_images/gh4xzckdfk8lcqzbosnu.jpg	users_images/c1vhdkhy9wrrizfe0pjd	users_images/gh4xzckdfk8lcqzbosnu
+32			72	2021-07-06 18:07:53.983+02	2021-07-06 18:07:53.983+02				
+30	Thû, the Necromancer and Lord of Werewolves, was a character that is featured in The Book of Lost Tales, the early writings that would evolve into The Silmarillion. Thû would later evolve into the character of Sauron.	Might & Magic	70	2021-06-09 14:45:39.325+02	2021-06-09 14:55:23.277+02	http://res.cloudinary.com/dqu0r0rl2/image/upload/v1623243132/users_images/w7ojpxj6btrnfzsgoviy.jpg	http://res.cloudinary.com/dqu0r0rl2/image/upload/v1623243168/users_images/nnb8ib0ouuz9wkunpohm.jpg	users_images/w7ojpxj6btrnfzsgoviy	users_images/nnb8ib0ouuz9wkunpohm
+34			74	2021-08-12 12:41:44.068+02	2021-08-12 12:41:44.068+02				
+35	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque a enim nec lectus maximus semper sed non magna. Praesent lacinia diam metus, et tempus arcu imperdiet at. Fusce id finibus diam, sit amet ullamcorper lectus. Vestibulum vel porta 	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque a enim nec lectus maximus semper sed non magna. Praesent lacinia diam metus, et	75	2021-08-12 12:43:55.451+02	2021-08-12 12:49:50.334+02				
+42			82	2021-08-17 09:47:46.437+02	2021-08-17 09:47:46.437+02				
+31	Proin finibus feugiat enim, vel sagittis nisi rutrum lobortis. Nullam vel egestas massa, et hendrerit libero. Sed luctus laoreet malesuada. Quisque sollicitudin dolor sem, id auctor neque accumsan at.	Reading books and exploring universes	71	2021-06-24 11:40:20.499+02	2021-06-24 11:45:46.742+02	http://res.cloudinary.com/dqu0r0rl2/image/upload/v1624527723/users_images/pywltmthjg3ekbzk9xxk.jpg	http://res.cloudinary.com/dqu0r0rl2/image/upload/v1624527724/users_images/sbehyq0ncelht5h9qmhg.jpg	users_images/pywltmthjg3ekbzk9xxk	users_images/sbehyq0ncelht5h9qmhg
+36			76	2021-08-13 17:31:26.884+02	2021-08-13 17:31:26.884+02				
+37			77	2021-08-13 17:33:09.211+02	2021-08-13 17:33:09.211+02				
+38			78	2021-08-13 17:37:11.876+02	2021-08-13 17:37:11.876+02				
+39			79	2021-08-16 11:28:40.42+02	2021-08-16 11:28:40.42+02				
+40			80	2021-08-16 17:49:34.401+02	2021-08-16 17:49:34.401+02				
+\.
+
+
+--
+-- TOC entry 3050 (class 0 OID 0)
+-- Dependencies: 209
+-- Name: Reviews_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Reviews_id_seq"', 53, true);
+
+
+--
+-- TOC entry 3051 (class 0 OID 0)
+-- Dependencies: 207
+-- Name: UserComics_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."UserComics_id_seq"', 554, true);
+
+
+--
+-- TOC entry 3052 (class 0 OID 0)
+-- Dependencies: 205
+-- Name: UserDetails_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."UserDetails_id_seq"', 42, true);
+
+
+--
+-- TOC entry 3053 (class 0 OID 0)
+-- Dependencies: 203
+-- Name: comics_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.comics_id_seq', 7, true);
+
+
+--
+-- TOC entry 3054 (class 0 OID 0)
+-- Dependencies: 201
+-- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.users_id_seq', 82, true);
+
+
+--
+-- TOC entry 2898 (class 2606 OID 17077)
+-- Name: reviews Reviews_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.reviews
+    ADD CONSTRAINT "Reviews_pkey" PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2888 (class 2606 OID 16573)
+-- Name: SequelizeMeta SequelizeMeta_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."SequelizeMeta"
+    ADD CONSTRAINT "SequelizeMeta_pkey" PRIMARY KEY (name);
+
+
+--
+-- TOC entry 2896 (class 2606 OID 17056)
+-- Name: users_comics UserComics_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.users_comics
+    ADD CONSTRAINT "UserComics_pkey" PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2894 (class 2606 OID 16995)
+-- Name: users_details UserDetails_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.users_details
+    ADD CONSTRAINT "UserDetails_pkey" PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2890 (class 2606 OID 16584)
+-- Name: users Users_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT "Users_pkey" PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2892 (class 2606 OID 16984)
+-- Name: comics comics_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.comics
+    ADD CONSTRAINT comics_pkey PRIMARY KEY (id);
+
+
+-- Completed on 2021-09-16 10:13:29
+
+--
+-- PostgreSQL database dump complete
+--
+

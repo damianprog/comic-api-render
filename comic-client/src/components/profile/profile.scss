@@ -19,6 +19,12 @@
   .header-details {
     position: relative;
 
+    .attribution {
+      font-size: 13px;
+      position: absolute;
+      right: 28px;
+    }
+
     h2 {
       font-size: 22px;
     }

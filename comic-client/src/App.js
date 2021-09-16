@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import Header from './components/header/header';
+import AppFooter from './components/app-footer/app-footer';
 import { Switch, Route } from 'react-router-dom';
 
 import './App.css';
@@ -32,7 +33,7 @@ function App() {
   });
 
   return (
-    <div>
+    <div className="app">
       <ThemeProvider theme={theme}>
         <Header></Header>
         <Switch>
@@ -68,6 +69,7 @@ function App() {
             component={ComicReviewUpdatePage}
           />
         </Switch>
+        <AppFooter></AppFooter>
       </ThemeProvider>
     </div>
   );

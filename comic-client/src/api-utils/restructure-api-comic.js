@@ -32,6 +32,20 @@ const getComicDescription = (comic) => {
   return comic.description ? StripHtmlTags(comic.description) : '';
 };
 
+const getLinkingUrl = (comic) => {
+  let linkingUrl = 'https://marvel.com';
+
+  if (!comic.urls || comic.urls.length === 0) {
+    return linkingUrl;
+  }
+
+  let UrlObject = comic.urls.find((url) => url.type === 'purchase');
+
+  linkingUrl = UrlObject ? UrlObject.url : comic.urls[0].url;
+
+  return linkingUrl;
+};
+
 const restructureApiComic = (comic) => {
   const restructuredComic = {
     id: String(comic.id),
@@ -45,6 +59,7 @@ const restructureApiComic = (comic) => {
   restructuredComic.inker = getCreatorByRole(comic, 'inker');
   restructuredComic.penciler = getCreatorByRole(comic, 'penciler');
   restructuredComic.seriesId = getSeriesId(comic);
+  restructuredComic.linkingUrl = getLinkingUrl(comic);
 
   return restructuredComic;
 };
