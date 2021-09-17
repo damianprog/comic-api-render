@@ -1,4 +1,5 @@
 import React from 'react';
+import { ErrorBoundary } from 'react-error-boundary';
 import AppHeader from './components/app-header/app-header';
 import AppFooter from './components/app-footer/app-footer';
 import { Switch, Route } from 'react-router-dom';
@@ -18,6 +19,7 @@ import SignoutPage from './components/signout/signout-page';
 import SignDependentRoute from './components/router/sign-dependent-route';
 import ComicReviewPage from './components/comic-review/comic-review-page';
 import ComicReviewUpdatePage from './components/comic-review-creation/comic-review-update-page';
+import ErrorPage from './components/error-page/error-page';
 // import { createMuiTheme, makeStyles, ThemeProvider } from '@material-ui/core/styles';
 
 function App() {
@@ -36,39 +38,50 @@ function App() {
     <div className="app">
       <ThemeProvider theme={theme}>
         <AppHeader></AppHeader>
-        <Switch>
-          <Route exact path="/" component={Homepage} />
-          <Route exact path="/search" component={Search} />
-          <Route exact path="/comic/:comicId" component={ComicIssuePage} />
-          <SignDependentRoute
-            forSigned
-            exact
-            path="/comic/:comicId/reviews/create"
-            component={ComicReviewCreationPage}
-          />
-          <SignDependentRoute exact path="/sign/:form" component={SignPage} />
-          <SignDependentRoute
-            forSigned
-            exact
-            path="/signout"
-            component={SignoutPage}
-          />
-          <Route exact path="/profile/:nickname" component={ProfilePage} />
-          <Route exact path="/profile/:nickname/library" component={Library} />
-          <SignDependentRoute
-            forSigned
-            exact
-            path="/edit-profile"
-            component={EditProfilePage}
-          />
-          <Route exact path="/reviews/:reviewId" component={ComicReviewPage} />
-          <SignDependentRoute
-            forSigned
-            exact
-            path="/reviews/:reviewId/update"
-            component={ComicReviewUpdatePage}
-          />
-        </Switch>
+        <ErrorBoundary FallbackComponent={ErrorPage}>
+          <Switch>
+            <Route exact path="/" component={Homepage} />
+            <Route exact path="/search" component={Search} />
+            <Route exact path="/comic/:comicId" component={ComicIssuePage} />
+            <Route exact path="/error-page" component={ErrorPage} />
+            <SignDependentRoute
+              forSigned
+              exact
+              path="/comic/:comicId/reviews/create"
+              component={ComicReviewCreationPage}
+            />
+            <SignDependentRoute exact path="/sign/:form" component={SignPage} />
+            <SignDependentRoute
+              forSigned
+              exact
+              path="/signout"
+              component={SignoutPage}
+            />
+            <Route exact path="/profile/:nickname" component={ProfilePage} />
+            <Route
+              exact
+              path="/profile/:nickname/library"
+              component={Library}
+            />
+            <SignDependentRoute
+              forSigned
+              exact
+              path="/edit-profile"
+              component={EditProfilePage}
+            />
+            <Route
+              exact
+              path="/reviews/:reviewId"
+              component={ComicReviewPage}
+            />
+            <SignDependentRoute
+              forSigned
+              exact
+              path="/reviews/:reviewId/update"
+              component={ComicReviewUpdatePage}
+            />
+          </Switch>
+        </ErrorBoundary>
         <AppFooter></AppFooter>
       </ThemeProvider>
     </div>

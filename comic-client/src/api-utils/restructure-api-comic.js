@@ -2,7 +2,15 @@ import StripHtmlTags from '../utils/strip-html-tags';
 
 const getCoverImage = (comic) => {
   const { images } = comic;
-  return images && images[0] ? `${images[0].path}.${images[0].extension}` : '';
+
+  let coverImageUrl = '';
+
+  if (images && images[0]) {
+    const protocolUpdatedPath = images[0].path.replace('http://', 'https://');
+    coverImageUrl = `${protocolUpdatedPath}.${images[0].extension}`;
+  }
+
+  return coverImageUrl;
 };
 
 const getOnsaleDate = (comic) => {
@@ -35,13 +43,13 @@ const getComicDescription = (comic) => {
 const getLinkingUrl = (comic) => {
   let linkingUrl = 'https://marvel.com';
 
-  if (!comic.urls || comic.urls.length === 0) {
-    return linkingUrl;
+  if (comic.urls && comic.urls.length > 0) {
+    let urlObject = comic.urls.find((url) => url.type === 'purchase');
+
+    linkingUrl = urlObject ? urlObject.url : comic.urls[0].url;
+
+    linkingUrl = linkingUrl.replace('http://', 'https://');
   }
-
-  let UrlObject = comic.urls.find((url) => url.type === 'purchase');
-
-  linkingUrl = UrlObject ? UrlObject.url : comic.urls[0].url;
 
   return linkingUrl;
 };

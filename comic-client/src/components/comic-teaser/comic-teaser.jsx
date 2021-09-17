@@ -13,14 +13,6 @@ const ComicTeaser = ({ comic, showDescription, signedUser }) => {
     setOpenSaveComicDialog(!openSaveComicDialog);
   };
 
-  const comicMainCreators = () => {
-    const mainCreatorsNames = [];
-    if (comic.writer) mainCreatorsNames.push(comic.writer);
-    if (comic.inker) mainCreatorsNames.push(comic.inker);
-
-    return mainCreatorsNames;
-  };
-
   const { coverImage, title, id, description } = comic;
 
   const descriptionText = () => {

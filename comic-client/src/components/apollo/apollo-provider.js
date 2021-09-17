@@ -23,6 +23,8 @@ const Provider = () => {
 
       if (unauthenticatedError) {
         history.push('/signout');
+      } else {
+        history.push('/error-page');
       }
     }
   });
