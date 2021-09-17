@@ -1,5 +1,5 @@
-import React, { Fragment } from 'react';
-import Header from './components/header/header';
+import React from 'react';
+import AppHeader from './components/app-header/app-header';
 import AppFooter from './components/app-footer/app-footer';
 import { Switch, Route } from 'react-router-dom';
 
@@ -35,7 +35,7 @@ function App() {
   return (
     <div className="app">
       <ThemeProvider theme={theme}>
-        <Header></Header>
+        <AppHeader></AppHeader>
         <Switch>
           <Route exact path="/" component={Homepage} />
           <Route exact path="/search" component={Search} />

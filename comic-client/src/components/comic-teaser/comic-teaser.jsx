@@ -1,11 +1,12 @@
 import { Button } from '@material-ui/core';
 import { LibraryAdd } from '@material-ui/icons';
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import SaveComicDialog from '../save-comic/save-comic-dialog';
 import './comic-teaser.scss';
 
-const ComicTeaser = ({ comic, showDescription }) => {
+const ComicTeaser = ({ comic, showDescription, signedUser }) => {
   const [openSaveComicDialog, setOpenSaveComicDialog] = useState(false);
 
   const toggleSaveDialog = () => {
@@ -21,7 +22,6 @@ const ComicTeaser = ({ comic, showDescription }) => {
   };
 
   const { coverImage, title, id, description } = comic;
-  const creators = comicMainCreators(comic).join(', ');
 
   const descriptionText = () => {
     return description.substring(0, 175);
@@ -39,12 +39,14 @@ const ComicTeaser = ({ comic, showDescription }) => {
         <Link to={`/comic/${id}`}>
           <h3>{title}</h3>
         </Link>
-        <p>{creators}</p>
+        <a href={comic.linkingUrl}>See at Marvel store</a>
         <div className="save-dialog">
-          <Button disableRipple onClick={toggleSaveDialog}>
-            <LibraryAdd />
-            Save Comic
-          </Button>
+          {signedUser && (
+            <Button disableRipple onClick={toggleSaveDialog}>
+              <LibraryAdd />
+              Save Comic
+            </Button>
+          )}
         </div>
         {showDescription && (
           <div className="description">
@@ -66,4 +68,8 @@ const ComicTeaser = ({ comic, showDescription }) => {
   );
 };
 
-export default ComicTeaser;
+const mapStateToProps = (state) => ({
+  signedUser: state.user.signedUser,
+});
+
+export default connect(mapStateToProps)(ComicTeaser);

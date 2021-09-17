@@ -6,6 +6,7 @@ import { REVIEW } from '../../graphql/graphql';
 
 import './comic-review-creation-page.scss';
 import { connect } from 'react-redux';
+import { CircularProgress } from '@material-ui/core';
 
 const ComicReviewUpdatePage = ({ signedUser, history }) => {
   const { reviewId } = useParams();
@@ -13,7 +14,7 @@ const ComicReviewUpdatePage = ({ signedUser, history }) => {
   const isSignedUserReviewAuthor = (userReview) =>
     userReview.user.id === signedUser.id;
 
-  const { data: { review } = {} } = useQuery(REVIEW, {
+  const { data: { review } = {}, loading } = useQuery(REVIEW, {
     fetchPolicy: 'no-cache',
     variables: {
       id: reviewId,
@@ -28,6 +29,12 @@ const ComicReviewUpdatePage = ({ signedUser, history }) => {
   return (
     <div className="comic-review-creation-page">
       <div className="wrapper">
+        {loading && (
+          <div className="loading">
+            <CircularProgress />
+          </div>
+        )}
+
         {review && isSignedUserReviewAuthor(review) && (
           <ComicReviewCreation update review={review} comic={review.comic} />
         )}

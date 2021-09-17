@@ -3,21 +3,7 @@ import { Link } from 'react-router-dom';
 
 import './search-results-list-item.scss';
 
-const SearchResultsListItem = ({
-  comic,
-  comic: { id, coverImage, title, onsaleDate },
-}) => {
-  const publishedYear = () => {
-    let year = '';
-    if (onsaleDate) {
-      const parsedDate = new Date(Date.parse(onsaleDate));
-      const dateOptions = { year: 'numeric' };
-      year = parsedDate.toLocaleDateString('en-US', dateOptions);
-    }
-
-    return year;
-  };
-
+const SearchResultsListItem = ({ comic, comic: { id, coverImage, title } }) => {
   return (
     <div className="search-item">
       <Link to={`/comic/${id}`}>
@@ -32,7 +18,9 @@ const SearchResultsListItem = ({
           <Link to={`/comic/${id}`}>
             <h2>{title}</h2>
           </Link>
-          <b>{publishedYear()}</b>
+          <a className="linking" href={comic.linkingUrl}>
+            <b>See at Marvel store</b>
+          </a>
         </div>
       </div>
     </div>

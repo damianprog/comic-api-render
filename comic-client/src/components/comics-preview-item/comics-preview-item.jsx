@@ -12,32 +12,21 @@ const ComicsPreviewItem = ({
   controlDropdownContent,
   disableAnimation,
 }) => {
-  const mainCreatorsLastNames = () => {
-    const mainCreatorsNames = [];
-    if (comic.writer) mainCreatorsNames.push(comic.writer);
-    if (comic.inker) mainCreatorsNames.push(comic.inker);
-    return mainCreatorsNames.map((creatorName) => creatorName.split(' ').pop());
-  };
-
   const redirectToComicPage = () => {
     history.push(`/comic/${comic.id}`);
     window.scrollTo(0, 0);
   };
 
   const { title, coverImage } = comic;
-  const creators = mainCreatorsLastNames().join(', ');
 
   return (
-    <div>
-      <div className={`comics-preview-item ${disableAnimation ? '' : 'move'}`}>
+    <div className="comics-preview-item">
+      <div className={`animated-preview ${disableAnimation ? '' : 'move'}`}>
         <div onClick={redirectToComicPage} className="img-container">
           <img alt="comic" src={coverImage} />
         </div>
         <div className="info-actions">
-          <div>
-            <h5 onClick={redirectToComicPage}>{title}</h5>
-            <span>{creators}</span>
-          </div>
+          <h5 onClick={redirectToComicPage}>{title}</h5>
           {showControls ? (
             <div className="controls">
               <Dropdown activator={<MoreVert />}>
@@ -47,6 +36,7 @@ const ComicsPreviewItem = ({
           ) : null}
         </div>
       </div>
+      <a href={comic.linkingUrl}>See at Marvel store</a>
     </div>
   );
 };

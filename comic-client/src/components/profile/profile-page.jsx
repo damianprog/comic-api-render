@@ -18,13 +18,13 @@ const ProfilePage = () => {
 
   return (
     <div className="profile-page">
-      {loading ? (
+      {loading && (
         <div className="loading">
           <CircularProgress />
         </div>
-      ) : (
-        <Profile user={user} />
       )}
+
+      {user && <Profile user={user} />}
     </div>
   );
 };

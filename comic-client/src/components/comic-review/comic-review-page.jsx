@@ -19,13 +19,13 @@ const ComicReviewPage = () => {
   return (
     <div className="comic-review-page">
       <div className="wrapper">
-        {loading ? (
+        {loading && (
           <div className="loading">
             <CircularProgress />
           </div>
-        ) : (
-          <ComicReview review={review} />
         )}
+
+        {review && <ComicReview review={review} />}
       </div>
     </div>
   );

@@ -65,6 +65,7 @@ export const CREATE_USER_COMIC = gql`
         writer
         inker
         penciler
+        linkingUrl
       }
       createdAt
     }
@@ -87,6 +88,7 @@ export const USER_COMICS = gql`
         writer
         inker
         penciler
+        linkingUrl
       }
       createdAt
     }
@@ -103,6 +105,7 @@ export const DELETE_USER_COMIC = gql`
       }
       comic {
         id
+        linkingUrl
       }
       category
     }
@@ -135,6 +138,7 @@ export const REVIEW = gql`
         writer
         inker
         penciler
+        linkingUrl
       }
       text
       createdAt
@@ -181,6 +185,7 @@ export const CREATE_REVIEW = gql`
         writer
         inker
         penciler
+        linkingUrl
       }
       text
       createdAt
@@ -203,6 +208,7 @@ export const UPDATE_REVIEW = gql`
         writer
         inker
         penciler
+        linkingUrl
       }
       text
       createdAt
@@ -233,6 +239,7 @@ export const USER_ACTIVITIES = gql`
           writer
           inker
           penciler
+          linkingUrl
         }
         category
         createdAt
@@ -253,6 +260,7 @@ export const USER_ACTIVITIES = gql`
           writer
           inker
           penciler
+          linkingUrl
         }
         text
         createdAt
@@ -274,6 +282,7 @@ export const REVIEWS = gql`
       }
       comic {
         id
+        linkingUrl
       }
       text
       createdAt

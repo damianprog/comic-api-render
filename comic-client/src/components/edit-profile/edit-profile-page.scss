@@ -1,6 +1,13 @@
 .edit-profile-page {
   display: flex;
   justify-content: center;
+
+  .loading {
+    margin-top: 30px;
+    text-align: center;
+    height: 50px;
+  }
+
   .edit-profile {
     max-width: 650px;
     padding-bottom: 0;

@@ -55,12 +55,13 @@
 
   @media (max-width: 600px) {
     .avatar {
-      width: 90px;
-      height: 90px;
+      width: 100px;
+      height: 100px;
       margin-top: -45px;
     }
 
     .background-image {
+      padding-bottom: 32%;
       .control-icons {
         width: 85px;
       }

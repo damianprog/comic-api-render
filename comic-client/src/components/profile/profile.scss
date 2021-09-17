@@ -10,6 +10,10 @@
     padding: 10px 28px 0 28px;
   }
 
+  .loading {
+    max-width: 550px;
+  }
+
   .profile-content {
     .user-activities-list {
       max-width: 550px;
@@ -20,9 +24,10 @@
     position: relative;
 
     .attribution {
-      font-size: 13px;
+      font-size: 11px;
       position: absolute;
-      right: 28px;
+      width: 120px;
+      right: 33px;
     }
 
     h2 {

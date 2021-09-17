@@ -44,6 +44,10 @@ const ComicIssueDetailsInfo = ({ comic }) => {
         </div>
       ) : null}
 
+      <a href={comic.linkingUrl}>
+        <b>See at Marvel store</b>
+      </a>
+
       <div className="info-description">{description}</div>
     </div>
   );

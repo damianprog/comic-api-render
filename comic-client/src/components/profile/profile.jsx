@@ -12,10 +12,13 @@ import EditProfileActivator from '../edit-profile/edit-profile-activator';
 import ProfilePageDetailsStatistics from './profile-details-statistics';
 import ProfileDetailsAbout from './profile-details-about';
 import { useEffect } from 'react';
+import { CircularProgress } from '@material-ui/core';
 
 const Profile = ({ user, signedUser }) => {
-  const [getUserActivities, { data: { userActivities } = {}, fetchMore }] =
-    useLazyQuery(USER_ACTIVITIES, { fetchPolicy: 'network-only' });
+  const [
+    getUserActivities,
+    { data: { userActivities } = {}, fetchMore, loading },
+  ] = useLazyQuery(USER_ACTIVITIES, { fetchPolicy: 'network-only' });
 
   useEffect(() => {
     if (user) {
@@ -46,7 +49,7 @@ const Profile = ({ user, signedUser }) => {
           backgroundImage={backgroundImage}
         />
         <div className="header-details">
-          <p className="attribution">Data provided by Marvel. © 2014 Marvel</p>
+          <p className="attribution">Data provided by Marvel. © 2021 Marvel</p>
           {isSignedUseruser() && <EditProfileActivator profileUser={user} />}
           <h2>{nickname}</h2>
           <p className="joined">
@@ -63,6 +66,12 @@ const Profile = ({ user, signedUser }) => {
         </div>
       </header>
       <div className="profile-content">
+        {loading && (
+          <div className="loading">
+            <CircularProgress />
+          </div>
+        )}
+
         {userActivities && (
           <UserActivitiesList
             userActivities={userActivities}

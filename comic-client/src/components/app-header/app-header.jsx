@@ -9,9 +9,9 @@ import { Search } from '@material-ui/icons';
 import SignDialog from '../sign/sign-dialog';
 import UserDropdown from '../user-dropdown/user-dropdown';
 
-import './header.scss';
+import './app-header.scss';
 
-const Header = ({ signedUser }) => {
+const AppHeader = ({ signedUser }) => {
   const [openSignDialog, setOpenSignDialog] = useState(false);
   const [signDialogForm, setSignDialogFormType] = useState('signin');
 
@@ -67,4 +67,4 @@ const mapStateToProps = (state) => ({
   signedUser: state.user.signedUser,
 });
 
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps)(AppHeader);
