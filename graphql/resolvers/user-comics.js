@@ -105,6 +105,11 @@ module.exports = {
           where: { id },
           include: ['user', 'comic'],
         });
+
+        if (!deletedUserComic) {
+          throw new UserInputError('UserComic with provided id does not exist');
+        }
+
         deletedUserComic.destroy();
 
         return deletedUserComic;

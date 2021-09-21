@@ -15,14 +15,23 @@ const Provider = () => {
     credentials: 'include',
   });
 
-  const signoutLink = onError(({ graphQLErrors }) => {
+  const handleErrorsLink = onError(({ graphQLErrors }) => {
     if (graphQLErrors) {
-      let unauthenticatedError = graphQLErrors.find(
-        (error) => error.extensions.code === 'UNAUTHENTICATED'
-      );
+      const handledError = graphQLErrors.find((error) => {
+        const errorCode = error.extensions.code;
+        return (
+          errorCode === 'UNAUTHENTICATED' || errorCode === 'BAD_USER_INPUT'
+        );
+      });
 
-      if (unauthenticatedError) {
-        history.push('/signout');
+      if (handledError) {
+        const handledErrorCode = handledError.extensions.code;
+
+        if (handledErrorCode === 'BAD_USER_INPUT') return;
+
+        if (handledErrorCode === 'UNAUTHENTICATED') {
+          history.push('/signout');
+        }
       } else {
         history.push('/error-page');
       }
@@ -30,7 +39,7 @@ const Provider = () => {
   });
 
   const client = new ApolloClient({
-    link: from([signoutLink, httpLink]),
+    link: from([handleErrorsLink, httpLink]),
     cache: new InMemoryCache(),
   });
 

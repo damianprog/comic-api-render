@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './save-comic-categories-list.scss';
 import { useMutation } from '@apollo/client';
 import {
@@ -11,6 +11,8 @@ import { CREATE_USER_COMIC, DELETE_USER_COMIC } from '../../graphql/graphql';
 import { addUserComicToCache } from '../../graphql/utils';
 
 const SaveComicCategoriesListItem = ({ comic, category, userComics = [] }) => {
+  const [isRequestPending, setIsRequestPending] = useState(false);
+
   const [deleteUserComic] = useMutation(DELETE_USER_COMIC, {
     update(cache, { data: { deleteUserComic } }) {
       cache.modify({
@@ -25,6 +27,7 @@ const SaveComicCategoriesListItem = ({ comic, category, userComics = [] }) => {
           },
         },
       });
+      setIsRequestPending(false);
     },
     onError(err) {
       console.log(err);
@@ -34,6 +37,7 @@ const SaveComicCategoriesListItem = ({ comic, category, userComics = [] }) => {
   const [createUserComic] = useMutation(CREATE_USER_COMIC, {
     update(cache, { data: { createUserComic } }) {
       addUserComicToCache(cache, createUserComic);
+      setIsRequestPending(false);
     },
     onError(err) {
       console.log(err);
@@ -41,19 +45,22 @@ const SaveComicCategoriesListItem = ({ comic, category, userComics = [] }) => {
   });
 
   const toggleComicCategory = (category) => {
-    const userComic = userComics.find(
-      (userComic) => userComic.category === category
-    );
+    if (!isRequestPending) {
+      setIsRequestPending(true);
+      const userComic = userComics.find(
+        (userComic) => userComic.category === category
+      );
 
-    if (userComic) {
-      deleteUserComic({ variables: { id: userComic.id } });
-    } else {
-      createUserComic({
-        variables: {
-          ...comic,
-          category,
-        },
-      });
+      if (userComic) {
+        deleteUserComic({ variables: { id: userComic.id } });
+      } else {
+        createUserComic({
+          variables: {
+            ...comic,
+            category,
+          },
+        });
+      }
     }
   };
 

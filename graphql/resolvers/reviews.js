@@ -43,17 +43,12 @@ module.exports = {
           throw new UserInputError('Errors', errors);
         }
 
-        if (text.trim() === '') {
-          throw new UserInputError('Errors', {
-            text: 'Review text must not be empty',
-          });
-        }
         const alreadyCreatedReview = await Review.findOne({
           where: { comicId: newComicInput.id, userId: user.id },
         });
 
         if (alreadyCreatedReview)
-          throw new UserInputError('Provided Review already exists.');
+          throw new UserInputError('Provided Review already exists');
 
         const { id } = newComicInput;
         let comic = await Comic.findOne({ where: { id } });

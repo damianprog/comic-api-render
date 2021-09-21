@@ -5,12 +5,14 @@ import './profile-details-statistics.scss';
 
 const ProfileDetailsStatistics = ({ userId }) => {
   const { data: { reviews } = {} } = useQuery(REVIEWS, {
+    fetchPolicy: 'network-only',
     variables: {
       userId,
     },
   });
 
   const { data: { userComics } = {} } = useQuery(USER_COMICS, {
+    fetchPolicy: 'network-only',
     variables: {
       userId,
     },

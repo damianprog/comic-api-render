@@ -14,7 +14,6 @@ const uploadImageToCloudinary = async (base64, preset) => {
 
     return uploadResponse;
   } catch (error) {
-    console.log('error: ', error);
     console.error(error);
   }
 };

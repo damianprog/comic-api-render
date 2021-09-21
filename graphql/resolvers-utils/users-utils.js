@@ -17,7 +17,7 @@ const updateUserImages = async (user, newUserImages) => {
           'users_images'
         );
 
-        newImage = uploadResponse.url;
+        newImage = uploadResponse.secure_url;
         newPublicId = uploadResponse.public_id;
       }
 

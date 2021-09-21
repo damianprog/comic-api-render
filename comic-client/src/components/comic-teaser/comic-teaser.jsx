@@ -31,15 +31,17 @@ const ComicTeaser = ({ comic, showDescription, signedUser }) => {
         <Link to={`/comic/${id}`}>
           <h3>{title}</h3>
         </Link>
-        <a href={comic.linkingUrl}>See at Marvel store</a>
-        <div className="save-dialog">
-          {signedUser && (
+        <a className="linking-url" href={comic.linkingUrl}>
+          See at Marvel store
+        </a>
+        {signedUser && (
+          <div className="save-dialog">
             <Button disableRipple onClick={toggleSaveDialog}>
               <LibraryAdd />
               Save Comic
             </Button>
-          )}
-        </div>
+          </div>
+        )}
         {showDescription && (
           <div className="description">
             {descriptionText()}

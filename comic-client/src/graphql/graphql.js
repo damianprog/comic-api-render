@@ -36,6 +36,7 @@ export const CREATE_USER_COMIC = gql`
     $inker: String
     $penciler: String
     $seriesId: ID
+    $linkingUrl: String
     $category: String!
   ) {
     createUserComic(
@@ -49,6 +50,7 @@ export const CREATE_USER_COMIC = gql`
         inker: $inker
         penciler: $penciler
         seriesId: $seriesId
+        linkingUrl: $linkingUrl
       }
       category: $category
     ) {
@@ -105,7 +107,6 @@ export const DELETE_USER_COMIC = gql`
       }
       comic {
         id
-        linkingUrl
       }
       category
     }
@@ -157,6 +158,7 @@ export const CREATE_REVIEW = gql`
     $inker: String
     $penciler: String
     $seriesId: ID
+    $linkingUrl: String
     $text: String!
   ) {
     createReview(
@@ -170,6 +172,7 @@ export const CREATE_REVIEW = gql`
         inker: $inker
         penciler: $penciler
         seriesId: $seriesId
+        linkingUrl: $linkingUrl
       }
       text: $text
     ) {
@@ -243,6 +246,7 @@ export const USER_ACTIVITIES = gql`
         }
         category
         createdAt
+        __typename
       }
       ... on Review {
         id
@@ -264,6 +268,7 @@ export const USER_ACTIVITIES = gql`
         }
         text
         createdAt
+        __typename
       }
     }
   }
@@ -282,7 +287,6 @@ export const REVIEWS = gql`
       }
       comic {
         id
-        linkingUrl
       }
       text
       createdAt

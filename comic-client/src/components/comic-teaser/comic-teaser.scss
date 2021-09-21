@@ -20,10 +20,15 @@
       margin: 7px 0;
     }
 
+    .linking-url {
+      margin-bottom: 7px;
+    }
+
     .save-dialog {
       display: flex;
       align-items: center;
       flex: 1;
+      margin-bottom: 7px;
 
       button {
         padding: 0;
