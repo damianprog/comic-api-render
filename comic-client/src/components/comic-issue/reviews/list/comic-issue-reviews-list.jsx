@@ -4,7 +4,7 @@ import './comic-issue-reviews-list.scss';
 
 const ComicIssueReviewsList = ({ reviews }) => {
   const sortedReviews = () => {
-    return [...reviews].sort(
+    return reviews.sort(
       (a, b) => parseInt(b.createdAt) - parseInt(a.createdAt)
     );
   };
@@ -12,8 +12,11 @@ const ComicIssueReviewsList = ({ reviews }) => {
   return (
     <div className="comic-issue-reviews-list">
       {reviews.length > 0 ? (
-        sortedReviews().map((review) => (
-          <ComicIssueReviewsListItem key={review.id} review={review} />
+        sortedReviews().map((review, index) => (
+          <ComicIssueReviewsListItem
+            key={`${review.id}-${index}`}
+            review={review}
+          />
         ))
       ) : (
         <p className="empty-info">There are no reviews of this comic yet!</p>
