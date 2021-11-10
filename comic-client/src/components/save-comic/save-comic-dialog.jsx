@@ -26,6 +26,7 @@ const SaveComicDialog = ({ comic, open, closeDialog }) => {
       disableScrollLock
       disableBackdropClick
       maxWidth={false}
+      disableEscapeKeyDown
     >
       <DialogTitle className="dialog-title">
         <span>Save at...</span>

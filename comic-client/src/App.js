@@ -20,6 +20,7 @@ import SignDependentRoute from './components/router/sign-dependent-route';
 import ComicReviewPage from './components/comic-review/comic-review-page';
 import ComicReviewUpdatePage from './components/comic-review-creation/comic-review-update-page';
 import ErrorPage from './components/error-page/error-page';
+import CustomizedSnackbar from './components/customized-snackbar/customized-snackbar';
 // import { createMuiTheme, makeStyles, ThemeProvider } from '@material-ui/core/styles';
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
     <div className="app">
       <ThemeProvider theme={theme}>
         <AppHeader></AppHeader>
+        <CustomizedSnackbar />
         <ErrorBoundary FallbackComponent={ErrorPage}>
           <Switch>
             <Route exact path="/" component={Homepage} />

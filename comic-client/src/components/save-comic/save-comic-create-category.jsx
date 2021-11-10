@@ -3,14 +3,16 @@ import './save-comic-create-category.scss';
 import { useMutation } from '@apollo/client';
 import { CREATE_USER_COMIC } from '../../graphql/graphql';
 import { Button, TextField } from '@material-ui/core';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import { Add } from '@material-ui/icons';
 import { addUserComicToCache } from '../../graphql/utils';
+import { setSnackbar } from '../redux/snackbar/snackbar-actions';
 
 const SaveComicCreateCategory = ({ comic, onCreate }) => {
   const [showForm, setShowForm] = useState(false);
   const [category, setCategory] = useState('');
   const [errors, setErrors] = useState({});
+  const dispatch = useDispatch();
 
   const toggleForm = () => {
     setShowForm(!showForm);
@@ -49,6 +51,10 @@ const SaveComicCreateCategory = ({ comic, onCreate }) => {
           },
         },
       });
+
+      dispatch(
+        setSnackbar(true, 'success', 'Comic has been saved to category')
+      );
 
       onCreate();
     },

@@ -8,7 +8,8 @@ import gql from 'graphql-tag';
 import EditProfileForm from './edit-profile-form';
 import { withRouter } from 'react-router-dom';
 import { setSignedUser } from '../redux/user/user-actions';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
+import { setSnackbar } from '../redux/snackbar/snackbar-actions';
 
 const EditProfile = ({
   profileUser: { nickname, birthDate, userDetails },
@@ -24,6 +25,7 @@ const EditProfile = ({
     interests: userDetails.interests,
     about: userDetails.about,
   });
+  const dispatch = useDispatch();
 
   const onChange = (keyValue) => {
     setValues({ ...values, ...keyValue });
@@ -35,6 +37,7 @@ const EditProfile = ({
     update(_, result) {
       setSignedUser(result.data.updateUser);
       if (showClose) close();
+      dispatch(setSnackbar(true, 'success', 'Profile changes have been saved'));
       history.push(`/profile/${result.data.updateUser.nickname}`);
     },
     onError(err) {

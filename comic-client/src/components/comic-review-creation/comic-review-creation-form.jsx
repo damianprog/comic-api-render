@@ -1,13 +1,16 @@
 import { useMutation } from '@apollo/client';
 import { Button, CircularProgress } from '@material-ui/core';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { withRouter } from 'react-router';
 import { CREATE_REVIEW, UPDATE_REVIEW } from '../../graphql/graphql';
+import { setSnackbar } from '../redux/snackbar/snackbar-actions';
 import './comic-review-creation-form.scss';
 
 const ComicReviewCreationForm = ({ comic, history, update, review }) => {
   const [errors, setErrors] = useState({});
   const [reviewText, setReviewText] = useState(review ? review.text : '');
+  const dispatch = useDispatch();
 
   const onReviewInputChange = (event) => {
     setErrors({});
@@ -16,6 +19,7 @@ const ComicReviewCreationForm = ({ comic, history, update, review }) => {
 
   const [createReview, { createLoading }] = useMutation(CREATE_REVIEW, {
     update() {
+      dispatch(setSnackbar(true, 'success', 'Review has been created'));
       history.push(`/comic/${comic.id}`);
     },
     onError(err) {
@@ -30,6 +34,7 @@ const ComicReviewCreationForm = ({ comic, history, update, review }) => {
 
   const [updateReview, { updateLoading }] = useMutation(UPDATE_REVIEW, {
     update() {
+      dispatch(setSnackbar(true, 'success', 'Review has been updated'));
       history.push(`/comic/${comic.id}`);
     },
     onError(err) {
