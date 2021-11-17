@@ -24,6 +24,28 @@
       }
     }
 
+    .controls {
+      position: relative;
+      cursor: pointer;
+
+      .dropdown-card {
+        position: absolute;
+        left: -110px;
+      }
+
+      .dropdown-card-content {
+        padding: 10px 0;
+
+        .MuiListItem-root {
+          white-space: nowrap;
+        }
+
+        &:last-child {
+          padding: 0;
+        }
+      }
+    }
+
     .update {
       color: #919191;
       font-size: 14px;

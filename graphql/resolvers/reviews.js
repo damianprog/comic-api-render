@@ -92,5 +92,27 @@ module.exports = {
 
       throw new AuthenticationError("Sorry, you're not an authenticated user!");
     },
+    async deleteReview(_, { id }, { user }) {
+      if (user) {
+        const deletedReview = await Review.findOne({
+          where: { id },
+          include: ['user', 'comic'],
+        });
+
+        if (!deletedReview) {
+          throw new UserInputError('Review with provided id does not exist');
+        }
+
+        if (deletedReview.user.id !== user.id) {
+          throw new UserInputError("Sorry, you're not the owner of this item!");
+        }
+
+        deletedReview.destroy();
+
+        return deletedReview;
+      }
+
+      throw new AuthenticationError("Sorry, you're not an authenticated user!");
+    },
   },
 };

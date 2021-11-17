@@ -31,8 +31,6 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, 'comic-client/build')));
 }
 
-console.log(__dirname);
-
 const server = new ApolloServer({
   typeDefs,
   resolvers,

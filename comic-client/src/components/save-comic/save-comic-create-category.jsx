@@ -52,9 +52,7 @@ const SaveComicCreateCategory = ({ comic, onCreate }) => {
         },
       });
 
-      dispatch(
-        setSnackbar(true, 'success', 'Comic has been saved to category')
-      );
+      dispatch(setSnackbar(true, 'success', 'Comic has been saved to library'));
 
       onCreate();
     },

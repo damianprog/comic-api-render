@@ -1,5 +1,13 @@
-import { Avatar } from '@material-ui/core';
-import React from 'react';
+import {
+  Avatar,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from '@material-ui/core';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import GetFormattedDate from '../../../../utils/get-formatted-date';
 import GetUserProfileImage from '../../../../utils/get-user-profile-image';
@@ -34,9 +42,11 @@ const ComicIssueReviewsListItem = ({ review }) => {
           <span>{publishedDate()}</span>
         </div>
         <MoreLess text={text} length={500} />
-        <Link className="more" to={`/reviews/${review.id}`}>
-          see review
-        </Link>
+        <div className="actions">
+          <Link className="more" to={`/reviews/${review.id}`}>
+            see review
+          </Link>
+        </div>
       </div>
     </div>
   );

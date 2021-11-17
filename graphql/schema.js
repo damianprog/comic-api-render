@@ -107,6 +107,7 @@ const typeDefs = gql`
     deleteUserComic(id: ID): UserComic
     createReview(newComicInput: NewComicInput!, text: String!): Review
     updateReview(comicId: ID!, text: String!): Review
+    deleteReview(id: ID): Review
     signout: Boolean
   }
 `;

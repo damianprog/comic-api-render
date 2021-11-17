@@ -27,8 +27,6 @@ const Provider = () => {
       if (handledError) {
         const handledErrorCode = handledError.extensions.code;
 
-        if (handledErrorCode === 'BAD_USER_INPUT') return;
-
         if (handledErrorCode === 'UNAUTHENTICATED') {
           history.push('/signout');
         }

@@ -110,6 +110,10 @@ module.exports = {
           throw new UserInputError('UserComic with provided id does not exist');
         }
 
+        if (deletedUserComic.user.id !== user.id) {
+          throw new UserInputError("Sorry, you're not the owner of this item!");
+        }
+
         deletedUserComic.destroy();
 
         return deletedUserComic;
