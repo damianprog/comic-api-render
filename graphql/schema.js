@@ -81,6 +81,14 @@ const typeDefs = gql`
     createdAt: String
   }
 
+  type Comment {
+    id: ID!
+    userComic: UserComic
+    review: Review
+    user: User!
+    text: String!
+  }
+
   union UserActivity = UserComic | Review
 
   type Query {
@@ -96,6 +104,8 @@ const typeDefs = gql`
       quantity: Int
       lastActivityCreatedAt: String
     ): [UserActivity]
+    comment(id: ID!): Comment
+    comments(userComicId: ID, reviewId: ID): [Comment]
   }
 
   type Mutation {
@@ -108,6 +118,7 @@ const typeDefs = gql`
     createReview(newComicInput: NewComicInput!, text: String!): Review
     updateReview(comicId: ID!, text: String!): Review
     deleteReview(id: ID): Review
+    createComment(userComicId: ID, reviewId: ID, text: String!): Comment
     signout: Boolean
   }
 `;
