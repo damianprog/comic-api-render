@@ -1,13 +1,5 @@
-import {
-  Avatar,
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-} from '@material-ui/core';
-import React, { useState } from 'react';
+import { Avatar } from '@material-ui/core';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import GetFormattedDate from '../../../../utils/get-formatted-date';
 import GetUserProfileImage from '../../../../utils/get-user-profile-image';

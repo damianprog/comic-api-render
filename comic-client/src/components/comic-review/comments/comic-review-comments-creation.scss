@@ -1,0 +1,36 @@
+.comic-review-comments-creation {
+  display: flex;
+
+  .avatar {
+    width: 60px;
+    height: 60px;
+  }
+
+  .creation-form {
+    width: 100%;
+    padding: 3px 10px;
+
+    .form-input {
+      width: 100%;
+
+      &.MuiInput-underline:hover {
+        &:before {
+          border-bottom: 1px solid rgba(0, 0, 0, 0.42);
+        }
+      }
+    }
+
+    .actions {
+      display: flex;
+      justify-content: end;
+      margin-top: 7px;
+
+      button:last-child {
+        margin-left: 8px;
+        border: 2px solid #5c5c5c;
+        width: 107px;
+        height: 39px;
+      }
+    }
+  }
+}

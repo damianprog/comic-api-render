@@ -67,12 +67,7 @@ const ComicReviewCreationForm = ({ comic, history, update, review }) => {
           required
         ></textarea>
       </label>
-      <Button
-        type="submit"
-        variant="outlined"
-        color="primary"
-        disabled={isLoading()}
-      >
+      <Button type="submit" color="primary" disabled={isLoading()}>
         {isLoading() ? (
           <CircularProgress color="inherit" size={25} />
         ) : (
