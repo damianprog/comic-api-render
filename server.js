@@ -33,10 +33,6 @@ app.use(
   })
 );
 
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, 'comic-client/build')));
-}
-
 const server = new ApolloServer({
   typeDefs,
   resolvers,
@@ -52,10 +48,6 @@ const server = new ApolloServer({
 });
 
 server.applyMiddleware({ app, cors: false });
-
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'comic-client/build/index.html'));
-});
 
 app.listen(PORT, () => {
   console.log(`The server started on port ${PORT}`);
