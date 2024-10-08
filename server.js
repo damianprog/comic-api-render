@@ -28,7 +28,7 @@ app.use(auth);
 app.use(
   cors({
     credentials: true,
-    origin: 'http://localhost:3000',
+    origin: 'https://grand-panda-ecf308.netlify.app/',
     // origin: 'http://localhost:5173',
   })
 );
