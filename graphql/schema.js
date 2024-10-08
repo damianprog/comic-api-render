@@ -8,6 +8,7 @@ const typeDefs = gql`
     birthDate: String!
     createdAt: String!
     userDetails: UserDetails
+    token: String
   }
 
   input UserSearch {
@@ -87,7 +88,7 @@ const typeDefs = gql`
     review: Review
     user: User!
     text: String!
-  }
+}
 
   union UserActivity = UserComic | Review
 

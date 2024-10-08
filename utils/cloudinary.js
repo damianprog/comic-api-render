@@ -11,7 +11,6 @@ const uploadImageToCloudinary = async (base64, preset) => {
     const uploadResponse = await cloudinary.uploader.upload(base64, {
       upload_preset: preset,
     });
-
     return uploadResponse;
   } catch (error) {
     console.error(error);

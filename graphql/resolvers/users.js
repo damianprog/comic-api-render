@@ -83,14 +83,10 @@ module.exports = {
 
       const token = generateToken(user);
 
-      res.cookie('authToken', token, {
-        httpOnly: true,
-        sameSite: 'none',
-        secure: true,
-        maxAge: 1000 * 60 * 60 * 24 * 7,
-      });
-
-      return user;
+      return {
+        ...user.dataValues,
+        token,
+      };
     },
     async signup(_, { signupInput }, { res }) {
       const { nickname, email, password } = signupInput;
@@ -137,6 +133,7 @@ module.exports = {
     },
 
     async updateUser(_, { updateUserInput }, { user }) {
+      
       if (user) {
         const { valid, errors } = validateUpdateUserInput(updateUserInput);
 
