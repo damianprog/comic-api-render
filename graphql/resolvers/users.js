@@ -156,14 +156,5 @@ module.exports = {
 
       throw new AuthenticationError("Sorry, you're not an authenticated user!");
     },
-    async signout(_, __, { res }) {
-      res.cookie('authToken', '', {
-        httpOnly: true,
-        sameSite: 'none',
-        secure: true,
-      });
-
-      return true;
-    },
   },
 };
